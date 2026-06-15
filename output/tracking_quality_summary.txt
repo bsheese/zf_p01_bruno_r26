@@ -1,0 +1,96 @@
+======================================================================
+PHYSICAL STAND LAYOUT (recovered from tank polygons)
+======================================================================
+ tank_pos  centroid_x  centroid_y column  frame_row  frame_half
+        1       192.6        74.6      L          1    top_half
+        2       201.1       206.2      L          2    top_half
+        3       210.9       323.8      L          3 bottom_half
+        4       223.4       427.3      L          4 bottom_half
+        5       490.9        78.8      R          1    top_half
+        6       479.8       210.0      R          2    top_half
+        7       467.1       326.9      R          3 bottom_half
+        8       455.6       430.0      R          4 bottom_half
+
+  frame_row 1 = top of camera frame (the slots the Python re-track
+  found overexposed). frame_row 4 = bottom of frame.
+
+======================================================================
+1. DETECTION RATE BY PHYSICAL SLOT  (all 624 sessions)
+======================================================================
+ tank_pos column  frame_row  n_sess  det_rate_mean  det_rate_med  n_excluded
+        1      L          1      78          0.546         0.542           7
+        2      L          2      78          0.664         0.720           4
+        3      L          3      78          0.627         0.705           2
+        4      L          4      78          0.526         0.500           4
+        5      R          1      78          0.703         0.779           3
+        6      R          2      78          0.710         0.782           4
+        7      R          3      78          0.678         0.740           7
+        8      R          4      78          0.642         0.687           4
+
+======================================================================
+2. DETECTION RATE BY FRAME ROW / HALF  (included sessions only)
+======================================================================
+  by frame row (1=top..4=bottom):
+ frame_row   n  det_rate_mean  det_rate_med  y_sd_mean
+         1 146          0.654         0.693     23.109
+         2 148          0.715         0.766     23.805
+         3 147          0.685         0.737     25.788
+         4 148          0.608         0.651     25.216
+
+  by frame half:
+ frame_half   n  det_rate_mean  det_rate_med  y_sd_mean
+bottom_half 295          0.646         0.679     25.501
+   top_half 294          0.685         0.743     23.459
+
+======================================================================
+3. WHERE DO THE QC-EXCLUDED SESSIONS FALL?
+======================================================================
+  35 excluded sessions total
+column  frame_row  n_excluded
+     L          1           7
+     L          2           4
+     L          3           2
+     L          4           4
+     R          1           3
+     R          2           4
+     R          3           7
+     R          4           4
+
+  excluded-session rate by frame half:
+             n_excl  n_sess  excl_rate
+frame_half                            
+bottom_half      17     312      0.054
+top_half         18     312      0.058
+
+======================================================================
+4. SUSPECT-TRACKING SIGNATURES BY SLOT  (all sessions)
+======================================================================
+  static_flag = det_rate>0.30 AND y_sd<5  (pinned like an artifact)
+  extreme_pct = pct_top <=.02 or >=.98
+ tank_pos  frame_row  n  n_static  n_extreme  y_sd_mean
+        1          1 78         0          1      23.77
+        5          1 78         0          6      22.76
+        6          2 78         0          4      24.00
+        2          2 78         0          2      23.86
+        7          3 78         0          3      25.51
+        3          3 78         0          2      26.05
+        4          4 78         0          4      24.57
+        8          4 78         1          5      25.52
+
+  TOTAL static-artifact-like sessions: 1
+    of which already QC-excluded:      0
+
+======================================================================
+5. INCLUDED-SESSION QUALITY: is it uniform across slots?
+======================================================================
+ tank_pos  n  det_rate_mean  det_rate_min  y_sd_mean  n_static
+        1 71          0.596         0.098     23.523         0
+        2 74          0.695         0.169     23.531         0
+        3 76          0.643         0.133     25.998         0
+        4 74          0.554         0.070     24.558         0
+        5 75          0.710         0.026     22.718         0
+        6 74          0.734         0.093     24.078         0
+        7 71          0.730         0.065     25.564         0
+        8 74          0.662         0.082     25.874         1
+
+  Across-slot detection-rate range (included): 0.554 – 0.734  (spread 0.180)

@@ -1,0 +1,11 @@
+trait_a,trait_b,r_disattenuated,ci_lo,ci_hi,r_mixed_model
+pct_top,latency,-0.9227,-1.096,-0.6951,-0.6979
+pct_top,transitions,0.1137,-0.1578,0.3746,0.1735
+pct_top,x_sd,0.1695,-0.0863,0.4096,0.1398
+pct_top,velocity,0.2061,-0.0538,0.4472,0.2089
+latency,transitions,-0.4091,-0.709,-0.0731,-0.4888
+latency,x_sd,-0.2202,-0.5239,0.1038,-0.0151
+latency,velocity,-0.2229,-0.5326,0.1074,-0.2384
+transitions,x_sd,0.6194,0.3948,0.7999,0.5736
+transitions,velocity,0.7466,0.5439,0.903,0.7091
+x_sd,velocity,0.242,-0.0159,0.478,0.1738

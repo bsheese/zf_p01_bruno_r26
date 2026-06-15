@@ -1,0 +1,17 @@
+analysis,estimand,value,ci_lo,ci_hi,n_fish,k,note
+R_all_sessions,R_A,0.5114,0.4092,0.5983,103.0,,"one-way ANOVA, all sessions, cluster-boot CI"
+R_all_sessions,R_A_mixed,0.5171,,,103.0,,mixedlm intercept-only
+R_all_sessions,R_C_mixed,0.5159,,,103.0,,mixedlm run as fixed effect
+R_complete_case,R_A,0.4977,0.378,0.5934,82.0,6.0,"ICC(1,1) one-way, cluster-boot CI"
+R_complete_case,R_C,0.4965,0.3813,0.5937,82.0,6.0,"ICC(C,1) consistency, cluster-boot CI"
+spearman_brown,alpha_all6,0.8554,,,82.0,6.0,
+spearman_brown,R_from_alpha,0.4965,,,82.0,6.0,single-measure R implied by alpha
+batch_decomposition,V_batch_pct,1.9354,,,,,
+batch_decomposition,V_fish_pct,49.8494,,,,,
+batch_decomposition,V_within_pct,48.2152,,,,,
+batch_decomposition,R_batch_adjusted,0.4985,,,,,V_fish/(V_batch+V_fish+V_within)
+novelty_vs_trait,alpha_runs2_6,0.8762,,,87.0,5.0,
+novelty_vs_trait,R_A_runs2_6,0.5857,0.4784,0.6704,87.0,5.0,"ICC(1,1) one-way"
+novelty_vs_trait,R_C_runs2_6,0.586,0.4843,0.6726,87.0,5.0,"ICC(C,1) consistency"
+novelty_vs_trait,r_run1_vs_trait,0.411,,,82.0,,
+novelty_vs_trait,mean_r_within_runs2_6,0.5842,,,82.0,,

@@ -1,0 +1,60 @@
+============================================================
+CRONBACH'S ALPHA — pct_top across 6 runs
+============================================================
+Fish with all 6 runs present: 82 / 103
+
+Cronbach's Alpha (pct_top_full, N=82 fish): α = 0.855
+  (Reference: original paper α = .88)
+  first 10 min: α = 0.865
+  last 10 min: α = 0.799
+
+  pingouin cronbach_alpha: α = 0.855, 95%CI = [0.801 0.899]
+
+============================================================
+INTER-RUN PEARSON CORRELATIONS — pct_top
+============================================================
+  Run 1 vs Run 2: r = 0.468  (n=82), p=0.0000
+  Run 1 vs Run 3: r = 0.402  (n=82), p=0.0002
+  Run 1 vs Run 4: r = 0.239  (n=82), p=0.0307
+  Run 1 vs Run 5: r = 0.351  (n=82), p=0.0012
+  Run 1 vs Run 6: r = 0.220  (n=82), p=0.0474
+  Run 2 vs Run 3: r = 0.549  (n=82), p=0.0000
+  Run 2 vs Run 4: r = 0.504  (n=82), p=0.0000
+  Run 2 vs Run 5: r = 0.479  (n=82), p=0.0000
+  Run 2 vs Run 6: r = 0.464  (n=82), p=0.0000
+  Run 3 vs Run 4: r = 0.652  (n=82), p=0.0000
+  Run 3 vs Run 5: r = 0.612  (n=82), p=0.0000
+  Run 3 vs Run 6: r = 0.621  (n=82), p=0.0000
+  Run 4 vs Run 5: r = 0.622  (n=82), p=0.0000
+  Run 4 vs Run 6: r = 0.658  (n=82), p=0.0000
+  Run 5 vs Run 6: r = 0.679  (n=82), p=0.0000
+
+  Mean inter-run r = 0.501
+
+============================================================
+REPEATED-MEASURES ANOVA — pct_top ~ day × time_of_day × time_in_tank
+============================================================
+
+  N = 82 fish, 982 observations
+
+  Within-subject ANOVA (day × time_in_tank):
+               Source        SS  ddof1  ddof2        MS         F     p_unc  p_GG_corr       ng2       eps
+0                 day  0.047321      2    162  0.023660  0.613933  0.542473   0.518677  0.001902  0.858509
+1        time_in_tank  0.002080      1     81  0.002080  0.194311  0.660527   0.660527  0.000084  1.000000
+2  day * time_in_tank  0.025662      2    162  0.012831  2.138697  0.121123   0.127873  0.001032  0.878366
+
+============================================================
+SUMMARY STATISTICS
+============================================================
+
+Mean pct_top_full per run (across all fish):
+  Run 1 (Day 1, AM): M=0.518, SD=0.255, N=95
+  Run 2 (Day 1, PM): M=0.494, SD=0.260, N=102
+  Run 3 (Day 2, AM): M=0.491, SD=0.236, N=101
+  Run 4 (Day 2, PM): M=0.490, SD=0.247, N=96
+  Run 5 (Day 3, AM): M=0.516, SD=0.237, N=98
+  Run 6 (Day 3, PM): M=0.500, SD=0.234, N=97
+
+Mean pct_top_full per strain:
+  5G: M=0.478, SD=0.226, N=48
+  AB: M=0.522, SD=0.258, N=55

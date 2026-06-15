@@ -1,0 +1,208 @@
+
+============================================================
+1. CRONBACH'S ALPHA — pct_top across 6 runs
+============================================================
+Fish with all 6 runs: 82 / 103
+
+  Raw pct_top:
+    full 20 min (N=82): α = 0.855, 95% CI [0.801, 0.899]
+    first 10 min (N=80): α = 0.865, 95% CI [0.813, 0.906]
+    last 10 min (N=82): α = 0.799, 95% CI [0.723, 0.859]
+
+  Slot-adjusted pct_top (physical-position residual removed; see
+  tracking_quality_by_position.md). Fish are randomized across slots,
+  so this removes tracking noise without biasing per-fish trait estimates:
+    full 20 min (N=82): α = 0.874, 95% CI [0.826, 0.912]
+    first 10 min (N=80): α = 0.879, 95% CI [0.833, 0.916]
+    last 10 min (N=82): α = 0.821, 95% CI [0.753, 0.875]
+
+  Reference: original (unpublished) analysis α = .88 (full 20 min)
+
+============================================================
+2. INTER-RUN PEARSON CORRELATIONS — pct_top
+============================================================
+  R1(D1AM) vs R2(D1PM): r = 0.468, p = 0.0000, n = 82
+  R1(D1AM) vs R3(D2AM): r = 0.402, p = 0.0002, n = 82
+  R1(D1AM) vs R4(D2PM): r = 0.239, p = 0.0307, n = 82
+  R1(D1AM) vs R5(D3AM): r = 0.351, p = 0.0012, n = 82
+  R1(D1AM) vs R6(D3PM): r = 0.220, p = 0.0474, n = 82
+  R2(D1PM) vs R3(D2AM): r = 0.549, p = 0.0000, n = 82
+  R2(D1PM) vs R4(D2PM): r = 0.504, p = 0.0000, n = 82
+  R2(D1PM) vs R5(D3AM): r = 0.479, p = 0.0000, n = 82
+  R2(D1PM) vs R6(D3PM): r = 0.464, p = 0.0000, n = 82
+  R3(D2AM) vs R4(D2PM): r = 0.652, p = 0.0000, n = 82
+  R3(D2AM) vs R5(D3AM): r = 0.612, p = 0.0000, n = 82
+  R3(D2AM) vs R6(D3PM): r = 0.621, p = 0.0000, n = 82
+  R4(D2PM) vs R5(D3AM): r = 0.622, p = 0.0000, n = 82
+  R4(D2PM) vs R6(D3PM): r = 0.658, p = 0.0000, n = 82
+  R5(D3AM) vs R6(D3PM): r = 0.679, p = 0.0000, n = 82
+
+  Mean inter-run r = 0.501
+
+============================================================
+3. WITHIN-DAY (AM vs. PM) RELIABILITY
+============================================================
+  Pearson r between AM and PM sessions within each day.
+  Day 1 (runs 1 AM vs 2 PM): r = 0.468, p = 0.0000, n = 82
+  Day 2 (runs 3 AM vs 4 PM): r = 0.652, p = 0.0000, n = 82
+  Day 3 (runs 5 AM vs 6 PM): r = 0.679, p = 0.0000, n = 82
+
+  Mean within-day r = 0.600
+
+============================================================
+4. DAY-TO-DAY RELIABILITY
+============================================================
+  ICC(2,1) across the 3 days, computed separately for AM and PM sessions.
+
+  AM sessions (runs [1, 3, 5]):
+    ICC(A,1) = 0.450, 95% CI [0.320, 0.580], F(81,162) = 3.44, p = 0.0000
+
+  PM sessions (runs [2, 4, 6]):
+    ICC(A,1) = 0.543, 95% CI [0.420, 0.660], F(81,162) = 4.54, p = 0.0000
+
+============================================================
+5. STRAIN DIFFERENCES — 5G (inbred) vs. AB (wild type)
+============================================================
+
+  5G: M = 0.474, SD = 0.174, N = 48 fish
+  AB: M = 0.526, SD = 0.208, N = 55 fish
+
+  Welch t-test: t = -1.381, p = 0.1703, Cohen's d = -0.271
+
+  Mixed model: pct_top_full ~ strain * run (fish random intercept)
+  Fixed effects:
+    Intercept                                 b =  0.4755, p = 0.0000
+    C(strain)[T.AB]                           b =  0.0498, p = 0.1884
+    run_c                                     b = -0.0113, p = 0.0646
+    C(strain)[T.AB]:run_c                     b =  0.0217, p = 0.0093
+
+============================================================
+6. WITHIN-SESSION HABITUATION — pct_top over 20 minutes
+============================================================
+  Does pct_top increase across the session (classic novel-tank pattern)?
+  Model: pct_top ~ minute + (1 + minute | fish_id), per run and overall.
+
+  Overall (all runs):
+    minute slope = 0.00074 per min (SE=0.00039), p = 0.0599
+    Intercept (at mean minute) = -0.000
+    → Over 20 min: expected pct_top change = 0.014
+
+  Strain 5G:
+    minute slope = 0.00139 per min (SE=0.00057), p = 0.0146
+    Intercept = -0.000
+
+  Strain AB:
+    minute slope = 0.00021 per min (SE=0.00054), p = 0.7012
+    Intercept = 0.526
+
+  Strain × minute interaction:
+    C(strain)[T.AB]                                b = -0.00000, p = 1.0000
+    minute_c                                       b = 0.00139, p = 0.0177
+    minute_c:C(strain)[T.AB]                       b = -0.00118, p = 0.1338
+
+============================================================
+8. LATENCY TO TOP AND TRANSITIONS — reliability and strain
+============================================================
+  latency_to_top : minutes to first detected frame in top half (NaN = never entered)
+  n_transitions  : top↔bottom zone crossings in detected frames
+
+  --- Latency to top (min) ---
+  Per run (M ± SD, N non-missing):
+    Run 1 (D1AM): M = 0.42, SD = 1.05, N = 82
+    Run 2 (D1PM): M = 1.51, SD = 3.13, N = 82
+    Run 3 (D2AM): M = 0.89, SD = 1.73, N = 82
+    Run 4 (D2PM): M = 0.92, SD = 1.97, N = 82
+    Run 5 (D3AM): M = 0.51, SD = 1.36, N = 82
+    Run 6 (D3PM): M = 0.56, SD = 1.30, N = 81
+
+  Strain means (across all runs):
+    5G: M = 1.15, SD = 1.26, N = 37
+    AB: M = 0.52, SD = 0.87, N = 45
+    Welch t = 2.578, p = 0.0123, d = 0.582
+
+  Cronbach's α (all 6 runs, N=81): 0.616, 95% CI [0.470, 0.732]
+  Inter-run correlations (r):
+    R1(D1AM) vs R2(D1PM): r = 0.175, p = 0.1161
+    R1(D1AM) vs R3(D2AM): r = 0.455, p = 0.0000
+    R1(D1AM) vs R4(D2PM): r = 0.334, p = 0.0022
+    R1(D1AM) vs R5(D3AM): r = 0.289, p = 0.0084
+    R1(D1AM) vs R6(D3PM): r = 0.174, p = 0.1210
+    R2(D1PM) vs R3(D2AM): r = 0.339, p = 0.0019
+    R2(D1PM) vs R4(D2PM): r = 0.274, p = 0.0128
+    R2(D1PM) vs R5(D3AM): r = -0.013, p = 0.9062
+    R2(D1PM) vs R6(D3PM): r = 0.421, p = 0.0001
+    R3(D2AM) vs R4(D2PM): r = 0.247, p = 0.0256
+    R3(D2AM) vs R5(D3AM): r = 0.269, p = 0.0147
+    R3(D2AM) vs R6(D3PM): r = 0.435, p = 0.0000
+    R4(D2PM) vs R5(D3AM): r = 0.214, p = 0.0540
+    R4(D2PM) vs R6(D3PM): r = 0.145, p = 0.1951
+    R5(D3AM) vs R6(D3PM): r = -0.010, p = 0.9308
+  Mean inter-run r = 0.250
+  Day-to-day ICC(A,1):
+    AM (N=82): ICC(A,1) = 0.307, 95% CI [0.170, 0.450], p = 0.0000
+    PM (N=81): ICC(A,1) = 0.236, 95% CI [0.100, 0.380], p = 0.0001
+
+  --- N transitions ---
+  Per run (M ± SD, N non-missing):
+    Run 1 (D1AM): M = 120.87, SD = 69.81, N = 82
+    Run 2 (D1PM): M = 86.35, SD = 47.21, N = 82
+    Run 3 (D2AM): M = 107.94, SD = 62.66, N = 82
+    Run 4 (D2PM): M = 94.50, SD = 57.10, N = 82
+    Run 5 (D3AM): M = 109.54, SD = 45.55, N = 82
+    Run 6 (D3PM): M = 98.61, SD = 50.56, N = 82
+
+  Strain means (across all runs):
+    5G: M = 113.77, SD = 43.46, N = 37
+    AB: M = 94.08, SD = 30.67, N = 45
+    Welch t = 2.322, p = 0.0235, d = 0.524
+
+  Cronbach's α (all 6 runs, N=82): 0.764, 95% CI [0.676, 0.835]
+  Inter-run correlations (r):
+    R1(D1AM) vs R2(D1PM): r = 0.418, p = 0.0001
+    R1(D1AM) vs R3(D2AM): r = 0.394, p = 0.0003
+    R1(D1AM) vs R4(D2PM): r = 0.279, p = 0.0112
+    R1(D1AM) vs R5(D3AM): r = 0.118, p = 0.2913
+    R1(D1AM) vs R6(D3PM): r = 0.315, p = 0.0039
+    R2(D1PM) vs R3(D2AM): r = 0.391, p = 0.0003
+    R2(D1PM) vs R4(D2PM): r = 0.330, p = 0.0025
+    R2(D1PM) vs R5(D3AM): r = 0.238, p = 0.0314
+    R2(D1PM) vs R6(D3PM): r = 0.415, p = 0.0001
+    R3(D2AM) vs R4(D2PM): r = 0.434, p = 0.0000
+    R3(D2AM) vs R5(D3AM): r = 0.320, p = 0.0034
+    R3(D2AM) vs R6(D3PM): r = 0.371, p = 0.0006
+    R4(D2PM) vs R5(D3AM): r = 0.386, p = 0.0003
+    R4(D2PM) vs R6(D3PM): r = 0.540, p = 0.0000
+    R5(D3AM) vs R6(D3PM): r = 0.497, p = 0.0000
+  Mean inter-run r = 0.363
+  Day-to-day ICC(A,1):
+    AM (N=82): ICC(A,1) = 0.275, 95% CI [0.140, 0.420], p = 0.0000
+    PM (N=82): ICC(A,1) = 0.424, 95% CI [0.290, 0.550], p = 0.0000
+
+============================================================
+7. SUMMARY STATISTICS
+============================================================
+
+  Per run (M ± SD, N fish):
+    Run 1 (Day 1 AM): M = 0.518, SD = 0.255, N = 95
+    Run 2 (Day 1 PM): M = 0.494, SD = 0.260, N = 102
+    Run 3 (Day 2 AM): M = 0.491, SD = 0.236, N = 101
+    Run 4 (Day 2 PM): M = 0.490, SD = 0.247, N = 96
+    Run 5 (Day 3 AM): M = 0.516, SD = 0.237, N = 98
+    Run 6 (Day 3 PM): M = 0.500, SD = 0.234, N = 97
+
+  Per strain (mean across all runs, N fish):
+    5G: M = 0.474, SD = 0.174, N = 48
+    AB: M = 0.526, SD = 0.208, N = 55
+
+  AM vs. PM (mean across all days, N obs):
+    AM: M = 0.508, SD = 0.242, N = 294
+    PM: M = 0.495, SD = 0.247, N = 295
+
+  Per day (mean across AM+PM, N obs):
+    Day 1: M = 0.506, SD = 0.257, N = 197
+    Day 2: M = 0.491, SD = 0.241, N = 197
+    Day 3: M = 0.508, SD = 0.235, N = 195
+
+  First 10 min vs. last 10 min (overall):
+    First 10 min: M = 0.502, SD = 0.265, N = 581
+    Last 10 min: M = 0.504, SD = 0.251, N = 589

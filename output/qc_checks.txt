@@ -1,0 +1,33 @@
+QC / ROBUSTNESS CHECKS
+============================================================
+
+0. STRAIN-BATCH CONFOUND (design)
+   Batches with a single strain: 13 of 13
+   5G batches: [1, 3, 5, 7, 9, 12]
+   AB batches: [2, 4, 6, 8, 10, 11, 13]
+   → Every batch is strain-pure: strain is COMPLETELY CONFOUNDED with
+     batch (testing date, room, handler, per-batch distortion calibration).
+     No within-batch strain contrast exists, so strain differences cannot
+     be separated from batch and are DESCRIPTIVE only — not attributable
+     to genotype. This is a property of the original design, not the
+     analysis, and bounds every strain result in this work.
+
+1. COMPLETE-CASE ATTRITION BY STRAIN
+   (fish analyzed → fish with all 6 runs)
+   5G: analyzed 48, complete 37, dropped 11 (22.9%)
+   AB: analyzed 55, complete 45, dropped 10 (18.2%)
+   Total complete-case: 82
+   → Attrition is similar across strains (not strongly asymmetric).
+
+2. PER-STRAIN REPEATABILITY OF pct_top (is the pooled R a chimera?)
+   5G : R = 0.471  (V_among = 0.0242, V_within = 0.0273, n_fish = 48)
+   AB : R = 0.537  (V_among = 0.0359, V_within = 0.0310, n_fish = 55)
+   ALL: R = 0.511  (V_among = 0.0306, V_within = 0.0293, n_fish = 103)
+   → The two strain estimates bracket the pooled value closely, so the
+     pooled R is representative, not an uninterpretable average of
+     dissimilar covariance structures. (This is a reliability robustness
+     check, NOT a strain comparison — strain is confounded with batch.)
+
+3. NON-ASCENDER LATENCY CODING (latency reliability only)
+   Sessions where the fish never entered the top half: 2 of 589 (0.3%)
+   These are coded as latency = 20 min (the full analysis window) in all downstream analyses (05_ml.py, 09_trait_structure.py).

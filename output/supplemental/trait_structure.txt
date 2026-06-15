@@ -1,0 +1,43 @@
+EXPLORATORY multivariate structure — NOT in the manuscript
+(strain confounded with batch; among-individual correlation approximate)
+
+==================================================================
+RAW PER-FISH-MEAN CORRELATIONS (n=82)
+==================================================================
+  pct_top      × latency       r = -0.623  [-0.740, -0.469]  p = 0.0000
+  pct_top      × transitions   r = +0.092  [-0.128, +0.303]  p = 0.4114
+  pct_top      × x_sd          r = +0.145  [-0.074, +0.351]  p = 0.1926
+  pct_top      × velocity      r = +0.173  [-0.045, +0.376]  p = 0.1191
+  latency      × transitions   r = -0.261  [-0.452, -0.047]  p = 0.0179
+  latency      × x_sd          r = -0.149  [-0.355, +0.070]  p = 0.1815
+  latency      × velocity      r = -0.148  [-0.354, +0.071]  p = 0.1845
+  transitions  × x_sd          r = +0.502  [+0.320, +0.649]  p = 0.0000
+  transitions  × velocity      r = +0.594  [+0.433, +0.718]  p = 0.0000
+  x_sd         × velocity      r = +0.204  [-0.013, +0.403]  p = 0.0658
+
+==================================================================
+AMONG-INDIVIDUAL CORRELATIONS (disattenuated / mixed-model)
+==================================================================
+  pct_top      × latency       r_dis=-0.923 [-1.096,-0.695]  r_mm=-0.698
+  pct_top      × transitions   r_dis=+0.114 [-0.158,+0.375]  r_mm=+0.174
+  pct_top      × x_sd          r_dis=+0.169 [-0.086,+0.410]  r_mm=+0.140
+  pct_top      × velocity      r_dis=+0.206 [-0.054,+0.447]  r_mm=+0.209
+  latency      × transitions   r_dis=-0.409 [-0.709,-0.073]  r_mm=-0.489
+  latency      × x_sd          r_dis=-0.220 [-0.524,+0.104]  r_mm=-0.015
+  latency      × velocity      r_dis=-0.223 [-0.533,+0.107]  r_mm=-0.238
+  transitions  × x_sd          r_dis=+0.619 [+0.395,+0.800]  r_mm=+0.574
+  transitions  × velocity      r_dis=+0.747 [+0.544,+0.903]  r_mm=+0.709
+  x_sd         × velocity      r_dis=+0.242 [-0.016,+0.478]  r_mm=+0.174
+
+==================================================================
+PCA on z-scored per-fish means; 5G/AB on the axes
+==================================================================
+  PC1: eigenvalue=2.173, %var=43.5
+  PC2: eigenvalue=1.339, %var=26.8
+  PC3: eigenvalue=0.799, %var=16.0
+  PC4: eigenvalue=0.446, %var=8.9
+  PC5: eigenvalue=0.242, %var=4.8
+  Loadings (oriented): PC1[pct_top=+0.39,latency=-0.44,transitions=+0.53,x_sd=+0.41,velocity=+0.45], PC2[pct_top=+0.61,latency=-0.54,transitions=-0.40,x_sd=-0.28,velocity=-0.32]
+  5G/AB difference on each component (Welch t; DESCRIPTIVE — batch-confounded):
+    PC1: t=1.22, p=0.2257, d=+0.28
+    PC2: t=-3.97, p=0.0002, d=-0.88

@@ -1,0 +1,51 @@
+Unsupervised clustering of 82 complete-case fish (all 6 runs)
+Features: 5 z-scored per-fish trait means ['pct_top', 'latency', 'transitions', 'x_sd', 'velocity']
+PC1/PC2 (from §15) used for visualization only.
+
+==================================================================
+1. CHOOSING k — silhouette and bootstrap stability
+==================================================================
+  Silhouette: higher = better separation. Stability: mean ARI between
+  full-data and 500 bootstrap k-means partitions (1=identical).
+
+    k   KMeans sil   Ward sil   stability ARI (mean±sd)
+    2       0.261      0.305   0.530 ± 0.308
+    3       0.257      0.246   0.499 ± 0.230
+    4       0.239      0.238   0.481 ± 0.175
+
+  Best k by KMeans silhouette: k = 2
+
+==================================================================
+2. CLUSTERS vs STRAIN — do clusters reproduce 5G/AB?
+==================================================================
+
+  k = 2:
+    cluster 0: n=56  5G=24 AB=32  (57% AB)
+    cluster 1: n=26  5G=13 AB=13  (50% AB)
+    chi-square p = 0.7141;  ARI(cluster, strain) = -0.002
+
+  k = 3:
+    cluster 0: n=42  5G=22 AB=20  (48% AB)
+    cluster 1: n=22  5G=13 AB= 9  (41% AB)
+    cluster 2: n=18  5G= 2 AB=16  (89% AB)
+    chi-square p = 0.0040;  ARI(cluster, strain) = +0.042
+
+  k = 4:
+    cluster 0: n=19  5G=12 AB= 7  (37% AB)
+    cluster 1: n=37  5G=16 AB=21  (57% AB)
+    cluster 2: n=11  5G= 8 AB= 3  (27% AB)
+    cluster 3: n=15  5G= 1 AB=14  (93% AB)
+    chi-square p = 0.0019;  ARI(cluster, strain) = +0.050
+
+  ARI near 0 ⇒ clusters are largely independent of strain (cut across it);
+  ARI near 1 ⇒ clusters reproduce the strain boundary.
+
+==================================================================
+3. CLUSTER PROFILES (k = 2) — mean trait z-scores
+==================================================================
+    cluster  n    pct_top  latency transiti     x_sd velocity   PC1    PC2
+       0    56      +0.43    -0.48    +0.29    +0.22    +0.28   +0.75  +0.26
+       1    26      -0.93    +1.04    -0.62    -0.48    -0.60   -1.61  -0.55
+
+  (z-scores: + above the sample mean, − below. pct_top↑/latency↓ = bolder;
+   transitions/x_sd/velocity↑ = more active.)

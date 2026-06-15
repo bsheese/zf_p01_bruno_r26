@@ -1,0 +1,76 @@
+=================================================================
+STRAIN CLASSIFICATION — 5G vs AB
+Evaluation: Leave-one-out cross-validation (LOOCV)
+=================================================================
+
+─────────────────────────────────────────────────────────────────
+Feature set A — Aggregate
+  Features: ['pct_top_mean', 'pct_top_sd', 'latency_mean', 'transitions_mean', 'x_sd_mean']
+  N fish: 103  (5G=48, AB=55)
+  Classifier     AUC     Acc    BalAcc
+  LR         0.798   0.748     0.748
+  LDA        0.798   0.728     0.728
+  RF         0.801   0.757     0.754
+
+─────────────────────────────────────────────────────────────────
+Feature set B — pct_top trajectory
+  Features: ['pct_top_r1', 'pct_top_r2', 'pct_top_r3', 'pct_top_r4', 'pct_top_r5', 'pct_top_r6']
+  N fish: 82  (5G=37, AB=45)
+  Classifier     AUC     Acc    BalAcc
+  LR         0.632   0.622     0.615
+  LDA        0.627   0.622     0.615
+  RF         0.536   0.561     0.552
+
+─────────────────────────────────────────────────────────────────
+Feature set C — Theory-driven
+  Features: ['delta_r1r2', 'novelty_effect', 'x_sd_mean', 'transitions_mean', 'latency_mean']
+  N fish: 94  (5G=41, AB=53)
+  Classifier     AUC     Acc    BalAcc
+  LR         0.837   0.777     0.772
+  LDA        0.832   0.777     0.772
+  RF         0.809   0.766     0.757
+
+─────────────────────────────────────────────────────────────────
+Feature set D — Full trajectory
+  Features: ['pct_top_r1', 'pct_top_r2', 'pct_top_r3', 'pct_top_r4', 'pct_top_r5', 'pct_top_r6', 'transitions_r1', 'transitions_r2', 'transitions_r3', 'transitions_r4', 'transitions_r5', 'transitions_r6', 'latency_r1', 'latency_r2', 'latency_r3', 'latency_r4', 'latency_r5', 'latency_r6']
+  N fish: 82  (5G=37, AB=45)
+  Classifier     AUC     Acc    BalAcc
+  LR         0.790   0.732     0.722
+  LDA        0.738   0.720     0.711
+  RF         0.747   0.695     0.681
+
+=================================================================
+BEST MODEL PER FEATURE SET (by AUC, RF)
+=================================================================
+  A — Aggregate                   AUC=0.801  Acc=0.757  BalAcc=0.754
+  B — pct_top trajectory          AUC=0.536  Acc=0.561  BalAcc=0.552
+  C — Theory-driven               AUC=0.809  Acc=0.766  BalAcc=0.757
+  D — Full trajectory             AUC=0.747  Acc=0.695  BalAcc=0.681
+
+=================================================================
+FEATURE IMPORTANCE — Theory-driven set C (RF, full fit)
+=================================================================
+  x_sd_mean                  0.3316
+  latency_mean               0.2384
+  delta_r1r2                 0.1672
+  novelty_effect             0.1506
+  transitions_mean           0.1122
+
+=================================================================
+FEATURE IMPORTANCE — pct_top trajectory set B (RF, full fit)
+=================================================================
+  pct_top_r1                 0.2072
+  pct_top_r2                 0.1931
+  pct_top_r6                 0.1581
+  pct_top_r4                 0.1493
+  pct_top_r5                 0.1477
+  pct_top_r3                 0.1446
+
+=================================================================
+LR COEFFICIENTS — Theory-driven set C (standardised)
+=================================================================
+  x_sd_mean                  -1.3283  (→ 5G)
+  latency_mean               -1.2522  (→ 5G)
+  delta_r1r2                 -0.6222  (→ 5G)
+  transitions_mean           -0.1388  (→ 5G)
+  novelty_effect             +0.0385  (→ AB)

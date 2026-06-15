@@ -1,0 +1,93 @@
+
+================================================================
+1. SINGLE-MEASURE REPEATABILITY (R) — pct_top
+================================================================
+  R = V_among / (V_among + V_within), the field-standard single-measure
+  repeatability (Lessells & Boag 1987; Nakagawa & Schielzeth 2010).
+  Cronbach's α (04_stats) is a 6-session COMPOSITE reliability and is not
+  directly comparable to single-measure R from the literature.
+    R_A = agreement   (runs not modelled)
+    R_C = consistency (run as fixed effect; removes population mean shift)
+
+  -- All available sessions (N=589 sessions, 103 fish, unbalanced) --
+    V_among (fish)   = 0.03141
+    V_within (resid) = 0.02934
+    R_A (mixed model)         = 0.517
+    R_A (ANOVA, Lessells-Boag)= 0.511  [cluster-boot 95% CI 0.409, 0.598]
+    R_C (run as fixed effect) = 0.516
+
+  -- Cross-check: complete cases (n=82 fish, all 6 runs), cluster-boot CI --
+    R_A = ICC(1,1) = 0.498  [95% CI 0.378, 0.593]
+    R_C = ICC(C,1) = 0.496  [95% CI 0.381, 0.594]
+
+  -- Spearman-Brown bridge to Cronbach's α --
+    Single-measure R_A = 0.498  (k = 6 sessions)
+    → composite reliability  k·R/(1+(k-1)R) = 0.856
+    Cronbach's α (all 6 runs, n=82) = 0.855
+    α implies single-measure R = α/(k-(k-1)α) = 0.496
+    → The two agree: the high α reflects averaging 6 sessions, not a
+      single-session repeatability that exceeds the literature.
+
+  -- Published single-measure R benchmarks --
+    bell2009 meta-analysis (lab) mean R ≈ 0.37
+    thomson2020 zebrafish bottom-time R = 0.39 (28 wk)
+    johnson2025 zebrafish lower-zone r = 0.29 (combined sexes)
+    → P1 single-session R_A ≈ 0.50 sits at/above the upper end of
+      this range; the 6-session composite (α=0.86) is correspondingly
+      high purely through Spearman-Brown aggregation.
+
+================================================================
+2. BATCH AS A VARIANCE COMPONENT
+================================================================
+  Fish are nested in batch (8 fish/batch, 13 batches, Jan–Mar 2014).
+  Model: pct_top ~ 1 + (1|batch) + (1|fish within batch).
+
+    V_batch  = 0.00118  ( 1.9% of total)
+    V_fish   = 0.03033  (49.8% of total)  ← among-individual, within batch
+    V_within = 0.02934  (48.2% of total)  ← within-individual (residual)
+
+    Batch-adjusted R = V_fish/(V_batch+V_fish+V_within) = 0.498
+    Batch accounts for 1.9% of total pct_top variance.
+    Interpretation: batch (testing date / room / experimenter) explains
+    only 1.9% of variance, so the batch-adjusted R (0.498) is
+    essentially identical to the unadjusted R_A (0.498). Modelling batch
+    is the standard control for repeated-measures designs (shishis2022); here
+    it confirms the reliability estimate is not inflated by batch structure —
+    reassuring given the documented within-batch spatial gradient and that
+    the 13 batches ran on different dates across Jan–Mar 2014.
+
+================================================================
+3. NOVELTY (RUN 1) vs TRAIT (RUNS 2–6) REPEATABILITY
+================================================================
+  Run 1 is the novel-tank debut; runs 2–6 are re-exposures (analysis.md
+  §2,7). The all-6-run R conflates the shared novelty→trait mean shift
+  with individual trait consistency (Biro & Stamps 2015). Reported with
+  and without Run 1, decomposing agreement (R_A) vs consistency (R_C).
+
+  -- Cronbach's α --
+    All 6 runs (k=6, n=82): α = 0.855
+    Runs 2–6   (k=5, n=87): α = 0.876
+    Run 1 alone: a single measure — no internal reliability defined.
+
+  -- Single-measure repeatability R (complete-case ICC, cluster-boot CI) --
+    set        R_A (agreement)         R_C (consistency)
+    all 6      0.498 [0.378,0.593]     0.496 [0.381,0.594]
+    runs 2–6   0.586 [0.478,0.670]     0.586 [0.484,0.673]
+    (runs 2–6 R_A all-sessions ANOVA = 0.583 [boot 0.485, 0.664])
+
+  -- Population mean shift across runs (what R_C removes) --
+    R1=0.518  R2=0.494  R3=0.491  R4=0.490  R5=0.516  R6=0.500
+    Run 1 mean = 0.518; Runs 2–6 mean = 0.498; shift = +0.020
+    The population mean shift is small, so R_A ≈ R_C (conditioning on run
+    barely changes the estimate). The Run 1 problem is therefore NOT a
+    mean-level trend but individual-level REORDERING: Run 1 rank-orders fish
+    differently from later runs. That is why dropping Run 1 (R_A 0.50 → 0.59),
+    not conditioning on run (R_C), is what raises repeatability — exactly the
+    acclimation-then-stable-trait pattern Biro & Stamps (2015) warn about.
+
+  -- Run 1 vs the trait composite (n=82 complete-case) --
+    r(Run 1, mean of Runs 2–6) = 0.411
+    mean pairwise r among Runs 2–6 = 0.584
+    Run 1 is markedly less coherent with the trait composite than the
+    re-exposure runs are with each other — consistent with thomson2020,
+    where week-1→2 repeatability (R=0.25) was far below later intervals.

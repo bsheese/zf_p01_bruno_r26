@@ -1,0 +1,22 @@
+lit/
+CLAUDE.md
+
+# Local-only working notes / vault
+vault/
+
+# Large raw data — not stored in git.
+# The raw frame CSV is hosted externally; fetch it with:
+#   python data/source/get_raw_data.py
+data/source/tracking_triallevel_distortion_corrected.csv
+data/source/tracking_triallevel_distortion_corrected.sav
+
+# Pipeline-generated intermediates — regenerate locally:
+#   python src/01_ingest.py    -> data/merged/
+#   python src/03_features.py  -> data/features/
+data/merged/
+data/features/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
