@@ -16,6 +16,9 @@ data/source/tracking_triallevel_distortion_corrected.sav
 data/merged/
 data/features/
 
+# Manuscript (kept local; not published to the remote)
+manuscript/
+
 # Python
 __pycache__/
 *.pyc
