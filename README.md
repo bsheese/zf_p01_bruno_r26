@@ -2,11 +2,7 @@
 
 This repository presents the following: 
 * Real data from an unpublished 2013 study of Zebrafish behavior in the novel-tank paradigm. 103 fish were assayed on six separate occassions for 20 minutes each. So, quite a bit of fish data: 103 fish X 6 sessions X 20 minutes at a sampling rate of 6 frames per second = ~ 4.5 million x, y, pairs. Do with it as you please. 
-* An 2026 re-analysis of the 2013 study driven by A.I. which converged with the original human analysis. All the normal A.I. cautions apply here. I'd encourage you to re-derive anything interestings from scratch to verify it. That said, the A.I. has done a lot of work here to translate the raw data into data sets you can work with. You can get a good sense of the data by following the code that does this initial processing. If you find errors, please post use Github Issues or send me a note.
-
-## What if I Just Want the Fish Data
- 
-
+* An 2026 re-analysis of the 2013 study driven by A.I. which converged with the original human analysis. All the normal A.I. cautions apply here. I'd encourage you to re-derive anything interesting from scratch to verify it. That said, the A.I. has done a lot of work here to translate the raw data into data sets you can work with. You can get a good sense of the data by following the code that does this initial processing. If you find errors, please post use Github Issues or send me a note.
 
 
 ## The Original Study: Developing an Inexpensive High-Throughput Tracking System for Zebrafish 
@@ -43,31 +39,12 @@ That data is sound. Feel free to do whatever with you like with it, but do see t
 Nearly everything else in this repo is A.I. generated and should be treated as such. In particular, the Python code and write-up of that data is a re-analysis conducted by A.I. (largely Claude Opus 4.8, Claude Sonnet 4.6, and Gemini Pro 3.1, with quite a bit of human orchestration). I was interested in seeing if A.I. would replicate the findings from 2013 that were originally conducted using some long-forgotten version of SPSS.  
 
 
-
-
-
-
-    
-
-
-
-
- 
-
-
-
-
+## 2026 A.I. Driven Re-analysis 
 A Python reanalysis of a six-session adult zebrafish (*Danio rerio*) novel-tank
 dataset, asking **how reliable the test's behavioral measures are over a short,
 within-days interval — and how that reliability should be reported.** The pipeline
 re-implements our laboratory's earlier Mathematica analysis from the same
 distortion-corrected tracking output and extends it.
-
-
- 
-
-
-
 
 ---
 
