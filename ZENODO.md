@@ -1,13 +1,6 @@
-# Zenodo record — copy/paste source
-
-Draft metadata for the Zenodo deposit of the raw tracking data. Fields marked
-`‹…›` still need to be filled in before publishing.
-
----
-
 ## Title
 
-Distortion-corrected frame-by-frame tracking coordinates from a zebrafish novel-tank behavioral study (Project P1)
+Distortion-corrected frame-by-frame tracking coordinates from a zebrafish novel-tank behavioral study (Project P01, 2013-2014)
 
 ## Description
 
@@ -54,6 +47,5 @@ SHA-256: `9f5c88414f86f93079fe100b166dc56ebe5c287dcefc839e4faddb1fb2747a4c`
 - License: CC BY 4.0
 - Language: English
 - Keywords: zebrafish; Danio rerio; novel tank test; anxiety-like behavior; behavioral tracking; animal personality; repeatability; ethology; video tracking
-- Authors / creators: ‹fill in — list the study investigators and ORCIDs›
-- Funding / grants: ‹fill in if applicable›
-- Related identifiers: ‹link the GitHub analysis repository once published (relation: "is supplemented by"); and the conference poster if you have a citable record›
+- Authors / creators: Brad E. Sheese, Ph.D. and Bruno Deharak, Ph.D.
+- Related identifiers: https://github.com/bsheese/zf_p01_bruno_r26
