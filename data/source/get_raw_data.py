@@ -19,11 +19,8 @@ import sys
 import urllib.request
 from pathlib import Path
 
-# ---------------------------------------------------------------------------
-# TODO: paste the public download URL after uploading the CSV to Zenodo/OSF.
-# Must be a direct-download link to the raw file (not an HTML landing page).
-RAW_DATA_URL = "REPLACE_ME_WITH_ZENODO_OR_OSF_DIRECT_DOWNLOAD_URL"
-# ---------------------------------------------------------------------------
+# Zenodo deposit: https://zenodo.org/records/20707067  (CC BY 4.0)
+RAW_DATA_URL = "https://zenodo.org/records/20707067/files/tracking_triallevel_distortion_corrected.csv?download=1"
 
 DEST = Path(__file__).resolve().parent / "tracking_triallevel_distortion_corrected.csv"
 SHA256 = "9f5c88414f86f93079fe100b166dc56ebe5c287dcefc839e4faddb1fb2747a4c"
