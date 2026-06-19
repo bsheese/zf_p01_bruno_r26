@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zebrafish Behavioral Reliability</title>
+<style>
+/* ── Reset & base ──────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #f7f4ef;
+  --white:    #ffffff;
+  --navy:     #1a1a2e;
+  --teal:     #3d405b;
+  --orange:   #e07a5f;
+  --green:    #81b29a;
+  --gold:     #f2cc8f;
+  --border:   #ddd8d0;
+  --text:     #2e2e2e;
+  --muted:    #666;
+  --max-w:    860px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+/* ── Nav ───────────────────────────────────────────────────────────────── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--navy);
+  padding: 0 1.5rem;
+  display: flex; align-items: center; gap: 2rem;
+  height: 52px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+nav .logo { color: #fff; font-weight: 700; font-size: 0.95rem; letter-spacing: .02em; white-space: nowrap; }
+nav a {
+  color: rgba(255,255,255,.75);
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  transition: color .2s;
+  white-space: nowrap;
+}
+nav a:hover { color: var(--gold); }
+.nav-links { display: flex; gap: 1.5rem; }
+
+/* ── Hero ──────────────────────────────────────────────────────────────── */
+.hero {
+  background: var(--navy);
+  color: #fff;
+  padding: 5rem 2rem 4rem;
+  text-align: center;
+}
+.hero h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.25;
+  max-width: 700px; margin: 0 auto 1.2rem;
+}
+.hero p {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,.78);
+  max-width: 580px; margin: 0 auto 2.4rem;
+}
+.hero .pill-row { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; }
+.pill {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 999px;
+  padding: .3rem 1rem;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,.85);
+}
+
+/* ── Sections ──────────────────────────────────────────────────────────── */
+section { padding: 4.5rem 2rem; }
+section:nth-child(even) { background: var(--white); }
+.inner { max-width: var(--max-w); margin: 0 auto; }
+
+.section-label {
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--orange);
+  margin-bottom: .5rem;
+}
+h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--navy);
+  margin-bottom: 1.2rem;
+}
+p { margin-bottom: 1rem; color: var(--text); }
+p:last-child { margin-bottom: 0; }
+
+/* ── Figure blocks ─────────────────────────────────────────────────────── */
+.fig-wrap {
+  margin: 2rem 0;
+  text-align: center;
+}
+.fig-wrap img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.1);
+  display: inline-block;
+}
+figcaption {
+  margin-top: .7rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: italic;
+  max-width: 580px;
+  margin-left: auto; margin-right: auto;
+}
+
+/* ── Two-column layout ─────────────────────────────────────────────────── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+.two-col.flip { direction: rtl; }
+.two-col.flip > * { direction: ltr; }
+@media (max-width: 660px) {
+  .two-col, .two-col.flip { grid-template-columns: 1fr; }
+}
+
+/* ── Stat cards ────────────────────────────────────────────────────────── */
+.stat-row {
+  display: flex; flex-wrap: wrap; gap: 1rem;
+  margin: 2rem 0;
+}
+.stat-card {
+  flex: 1 1 160px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.4rem 1.2rem;
+  text-align: center;
+}
+section:nth-child(even) .stat-card { background: var(--bg); }
+.stat-number {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--teal);
+  line-height: 1;
+  margin-bottom: .35rem;
+}
+.stat-label {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+/* ── Callout box ───────────────────────────────────────────────────────── */
+.callout {
+  border-left: 4px solid var(--orange);
+  background: rgba(224,122,95,.06);
+  padding: 1rem 1.2rem;
+  border-radius: 0 6px 6px 0;
+  margin: 1.5rem 0;
+  font-size: 0.97rem;
+}
+.callout.teal {
+  border-left-color: var(--teal);
+  background: rgba(61,64,91,.05);
+}
+.callout.green {
+  border-left-color: var(--green);
+  background: rgba(129,178,154,.08);
+}
+
+/* ── Measure table ─────────────────────────────────────────────────────── */
+table {
+  width: 100%; border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.92rem;
+}
+th {
+  background: var(--navy); color: #fff;
+  padding: .6rem .9rem; text-align: left;
+  font-weight: 600; font-size: 0.82rem;
+  letter-spacing: .04em; text-transform: uppercase;
+}
+td { padding: .6rem .9rem; border-bottom: 1px solid var(--border); }
+tr:nth-child(even) td { background: rgba(0,0,0,.025); }
+.bar-cell { display: flex; align-items: center; gap: .5rem; }
+.bar-bg { flex: 1; background: var(--border); border-radius: 99px; height: 7px; }
+.bar-fill { background: var(--teal); border-radius: 99px; height: 7px; }
+
+/* ── Literature row ────────────────────────────────────────────────────── */
+.lit-row {
+  display: flex; flex-wrap: wrap; gap: 1rem; margin: 1.5rem 0;
+}
+.lit-card {
+  flex: 1 1 180px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  background: var(--bg);
+}
+section:nth-child(even) .lit-card { background: rgba(247,244,239,.6); }
+.lit-number { font-size: 1.5rem; font-weight: 700; color: var(--muted); }
+.lit-label  { font-size: 0.8rem; color: var(--muted); margin-top: .2rem; }
+
+/* ── Takeaways ─────────────────────────────────────────────────────────── */
+.takeaway-list { list-style: none; margin: 1.5rem 0; }
+.takeaway-list li {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: .8rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.takeaway-list li:last-child { border-bottom: none; }
+.take-icon {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+  background: var(--teal); color: #fff;
+  margin-top: .15rem;
+}
+
+/* ── Footer ────────────────────────────────────────────────────────────── */
+footer {
+  background: var(--navy); color: rgba(255,255,255,.55);
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.82rem;
+}
+footer a { color: var(--gold); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<!-- ── Nav ─────────────────────────────────────────────────────────────────── -->
+<nav>
+  <span class="logo">Zebrafish Reliability</span>
+  <div class="nav-links">
+    <a href="#behavior">The Test</a>
+    <a href="#habituation">Habituation</a>
+    <a href="#reliability">Reliability</a>
+    <a href="#run1">Run 1</a>
+    <a href="#measures">Measures</a>
+  </div>
+</nav>
+
+<!-- ── Hero ────────────────────────────────────────────────────────────────── -->
+<div class="hero">
+  <h1>How consistently do individual zebrafish behave?</h1>
+  <p>We tested 103 zebrafish six times each and asked whether the same fish stayed
+     bold or shy across every session — and whether that consistency is strong
+     enough to be scientifically useful.</p>
+  <div class="pill-row">
+    <span class="pill">103 fish</span>
+    <span class="pill">6 sessions each</span>
+    <span class="pill">3 days</span>
+    <span class="pill">589 sessions analyzed</span>
+    <span class="pill">Novel-tank test</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SECTION 1 — THE TEST
+     ══════════════════════════════════════════════════════════════════════ -->
+<section id="behavior">
+<div class="inner two-col">
+  <div>
+    <p class="section-label">The Test</p>
+    <h2>A fish alone in an unfamiliar tank</h2>
+    <p>The <strong>novel-tank test</strong> places a single fish in a clean tank
+       it has never seen before. A camera tracks its position automatically for
+       20 minutes.</p>
+    <p>The key insight is <em>where</em> the fish goes. An anxious fish stays
+       near the floor — the bottom feels safer in an unfamiliar space. A bolder
+       fish explores the upper half sooner and more often.</p>
+    <p>Our main measure is <strong>pct_top</strong>: the proportion of time the
+       fish spends in the top half of the tank. Higher = bolder, less
+       anxiety-like behavior.</p>
+    <div class="callout teal">
+      <strong>How the tracker works:</strong> The system detects motion between
+      consecutive video frames. When a fish holds completely still, it becomes
+      invisible — so gaps in the data mean the fish wasn't moving, not that it
+      left the tank.
+    </div>
+  </div>
+  <figure class="fig-wrap" style="margin:0">
+    <img src="images/gif_trajectory.gif" alt="Animated fish trajectory"
+         style="max-width:280px">
+    <figcaption>One fish's path through Run 1 (first-ever exposure),
+      compressed from 20 minutes. The fish begins near the floor and gradually
+      drifts upward — the classic novel-tank habituation pattern.</figcaption>
+  </figure>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SECTION 2 — HABITUATION
+     ══════════════════════════════════════════════════════════════════════ -->
+<section id="habituation">
+<div class="inner">
+  <p class="section-label">Within-Session Behavior</p>
+  <h2>Fish explore more as each session progresses</h2>
+  <p>Pooled across all fish and all sessions, pct_top climbs steadily over the
+     20-minute window. This is <strong>habituation</strong> — the fish relaxes
+     as it learns the tank is safe. The rise is small per minute but consistent
+     and statistically reliable.</p>
+  <p>But notice something important: the <strong>red line (Run 1)</strong> and
+     the <strong>dark line (Runs 2–6)</strong> have different shapes even
+     though their 20-minute averages are similar. Run 1 starts much lower and
+     rises steeply; Runs 2–6 are nearly flat from the start. We return to this
+     in the <a href="#run1">Run 1 section</a>.</p>
+  <figure class="fig-wrap">
+    <img src="images/gif_habituation.gif"
+         alt="Minute-by-minute pct_top building up across the session">
+    <figcaption>Group-average pct_top building up minute by minute.
+      Red = Run 1 (novel tank); dark = Runs 2–6 (familiar tank).
+      Shaded bands are ±1 SE across fish.</figcaption>
+  </figure>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SECTION 3 — INDIVIDUAL DIFFERENCES
+     ══════════════════════════════════════════════════════════════════════ -->
+<section id="reliability">
+<div class="inner">
+  <p class="section-label">Individual Differences</p>
+  <h2>Do the same fish stay bold — or shy — across sessions?</h2>
+  <p>If pct_top measures something stable about an individual fish, then the
+     <em>ranking</em> of fish should be preserved from one session to the next:
+     the boldest fish in Run 1 should still be near the top in Run 6, and the
+     shyest fish should stay near the bottom.</p>
+
+  <figure class="fig-wrap">
+    <img src="images/gif_ranks.gif"
+         alt="Rank stability of 12 fish across 6 runs"
+         style="max-width:100%">
+    <figcaption>Twelve individual fish (each color = one fish) across all six
+      sessions. If ranks were random, lines would criss-cross chaotically.
+      Instead, they mostly stay in their lanes — bold fish stay bold,
+      shy fish stay shy.</figcaption>
+  </figure>
+
+  <p>To put a number on this consistency, we measure <strong>Cronbach's
+     α</strong> — a standard reliability statistic borrowed from psychology
+     and educational testing. Think of the six sessions as six judges scoring
+     each fish. If the judges agree with each other, the average score is
+     reliable. α ranges from 0 (no consistency) to 1 (perfect).</p>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-number">0.855</div>
+      <div class="stat-label">Cronbach's α<br>(6-session composite)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">0.874</div>
+      <div class="stat-label">Cronbach's α<br>(after position correction)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">0.88</div>
+      <div class="stat-label">Original Mathematica<br>analysis result</div>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <strong>Replication check:</strong> Our Python pipeline reproduces the
+    original result (α = 0.88) almost exactly. The small gap shrinks to
+    essentially zero after correcting for a minor position artifact in the
+    camera frame — confirming the original finding was not a fluke of the
+    software used.
+  </div>
+
+  <p>The correlation matrix below shows all 15 pairwise relationships between
+     the six sessions. Brighter = higher correlation = fish that ranked high
+     in one session also ranked high in the other.</p>
+
+  <figure class="fig-wrap">
+    <img src="images/reliability_matrix.png"
+         alt="Inter-run correlation matrix"
+         style="max-width:480px">
+    <figcaption>Every cell shows the Pearson correlation between two sessions.
+      The overall pattern is positive and moderate-to-strong, with one
+      exception: the top row and left column (Run 1) are noticeably
+      lower than the rest.</figcaption>
+  </figure>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SECTION 4 — SINGLE SESSION
+     ══════════════════════════════════════════════════════════════════════ -->
+<section>
+<div class="inner">
+  <p class="section-label">Single-Session Reliability</p>
+  <h2>How useful is just one 20-minute session?</h2>
+  <p>Cronbach's α = 0.855 describes the reliability of the
+     <em>average across all six sessions</em>, not a single one. For practical
+     purposes — and to compare with other labs — we need to know how reliable
+     one session is on its own.</p>
+  <p>We use <strong>repeatability R</strong>, which splits the total variation
+     in pct_top into two parts: stable between-fish differences (the signal)
+     and session-to-session fluctuation (the noise). R is the fraction that
+     is signal.</p>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-number">~0.50</div>
+      <div class="stat-label">R per session<br>(all 6 runs)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">~0.59</div>
+      <div class="stat-label">R per session<br>(Runs 2–6 only)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">&lt;2%</div>
+      <div class="stat-label">Variance explained<br>by testing batch</div>
+    </div>
+  </div>
+
+  <p>How does R ≈ 0.50 become α = 0.855? The
+     <strong>Spearman-Brown formula</strong> predicts exactly this: averaging
+     six independent measurements of a measure with R = 0.50 gives a composite
+     reliability of 0.86. There is no mystery — the high α comes from the
+     power of repetition, not from any single session being unusually
+     informative.</p>
+
+  <div class="callout teal">
+    <strong>Why batch doesn't inflate the number:</strong> Fish were tested
+    in groups of ~8 on different dates across three months. If "batch" (date,
+    room, experimenter) drove most of the differences, the reliability estimate
+    would be artificially inflated. We find batch explains less than 2% of
+    total variance — the R we report reflects genuine individual differences,
+    not batch-to-batch quirks.
+  </div>
+
+  <p>Compared to published work on related measures:</p>
+  <div class="lit-row">
+    <div class="lit-card">
+      <div class="lit-number">≈ 0.37</div>
+      <div class="lit-label">Bell 2009<br>meta-analysis mean R (lab studies)</div>
+    </div>
+    <div class="lit-card">
+      <div class="lit-number">0.39</div>
+      <div class="lit-label">Thomson 2020<br>zebrafish bottom-time R</div>
+    </div>
+    <div class="lit-card">
+      <div class="lit-number">0.29</div>
+      <div class="lit-label">Johnson 2025<br>zebrafish lower-zone r</div>
+    </div>
+    <div class="lit-card">
+      <div class="lit-number">~0.50</div>
+      <div class="lit-label"><strong>This study</strong><br>pct_top R per session</div>
+    </div>
+  </div>
+  <p>Our single-session repeatability sits at or above the upper end of
+     published values — a strong result for a behavioral measure.</p>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SECTION 5 — RUN 1
+     ══════════════════════════════════════════════════════════════════════ -->
+<section id="run1">
+<div class="inner">
+  <p class="section-label">The First Exposure</p>
+  <h2>Run 1 measures something different</h2>
+  <p>The correlation matrix above showed Run 1 sticking out: its correlations
+     with later sessions (r = 0.22–0.47) are consistently lower than the
+     correlations among Runs 2–6 (r = 0.46–0.68). Why?</p>
+  <p>Look at the curves below. The group mean pct_top for Run 1 is about
+     the same as for Runs 2–6 — so it's <em>not</em> that fish behave
+     differently on average the first time. What's different is the
+     <em>shape</em>: Run 1 starts much lower (anxious, near the bottom)
+     and rises steeply. Runs 2–6 start near the middle and stay flat.</p>
+
+  <figure class="fig-wrap">
+    <img src="images/run1_curve.png"
+         alt="Run 1 vs Runs 2-6 minute curve"
+         style="max-width:560px">
+    <figcaption>Within-session pct_top, minute by minute. Run 1 (red)
+      shows the classic dive-then-explore novelty response. Runs 2–6
+      (blue) are flat — the fish already knows this tank and starts
+      exploring immediately.</figcaption>
+  </figure>
+
+  <p>The key distinction: Run 1 measures the fish's <strong>novelty
+     response</strong> — how quickly it recovers from fear and begins
+     exploring. Runs 2–6 measure a more stable individual
+     <strong>exploration tendency</strong>. These two things are
+     related but not the same, which is why Run 1 correlates less
+     tightly with later sessions.</p>
+
+  <div class="callout">
+    <strong>What this means for researchers:</strong> A fish that is
+    bold on its first-ever exposure is not necessarily bold habitually —
+    and vice versa. Studies using only a single novel-tank session are
+    capturing the novelty response, not the stable exploration trait.
+    Repeated testing is needed to separate the two.
+  </div>
+
+  <p>When we exclude Run 1 and compute reliability on Runs 2–6 only, single-session
+     R rises from ~0.50 to ~0.59, and Cronbach's α rises from 0.855
+     to above 0.85 for a five-session composite — confirming that the
+     "familiar-tank" behavior is more consistent than the first-time
+     novelty response.</p>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SECTION 6 — OTHER MEASURES
+     ══════════════════════════════════════════════════════════════════════ -->
+<section id="measures">
+<div class="inner">
+  <p class="section-label">Other Behavioral Measures</p>
+  <h2>pct_top is not the only reliable measure</h2>
+  <p>We tracked five behavioral measures per session. Each one captures a
+     different aspect of how the fish moves and explores the tank.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Measure</th>
+        <th>What it captures</th>
+        <th>Single-session R</th>
+        <th>6-session α</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>pct_top</strong></td>
+        <td>Proportion of time in the upper half of the tank</td>
+        <td>
+          <div class="bar-cell">
+            <span>0.50</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:50%"></div></div>
+          </div>
+        </td>
+        <td>0.855</td>
+      </tr>
+      <tr>
+        <td><strong>velocity</strong></td>
+        <td>Average swimming speed</td>
+        <td>
+          <div class="bar-cell">
+            <span>0.51</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:51%"></div></div>
+          </div>
+        </td>
+        <td>0.86</td>
+      </tr>
+      <tr>
+        <td><strong>x position SD</strong></td>
+        <td>How much the fish roams side to side (range of horizontal movement)</td>
+        <td>
+          <div class="bar-cell">
+            <span>0.51</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:51%"></div></div>
+          </div>
+        </td>
+        <td>0.86</td>
+      </tr>
+      <tr>
+        <td><strong>transitions</strong></td>
+        <td>Number of times the fish crossed the top/bottom midline</td>
+        <td>
+          <div class="bar-cell">
+            <span>0.38</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:38%; background: var(--orange)"></div></div>
+          </div>
+        </td>
+        <td>0.75</td>
+      </tr>
+      <tr>
+        <td><strong>latency to top</strong></td>
+        <td>Minutes until the fish first entered the top half</td>
+        <td>
+          <div class="bar-cell">
+            <span>0.33</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:33%; background: var(--orange)"></div></div>
+          </div>
+        </td>
+        <td>0.70</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Vertical position (pct_top), swimming speed (velocity), and horizontal
+     range (x SD) are all equally repeatable. Transitions and latency are
+     somewhat less consistent — both are measured only on frames where the
+     fish was actually detected moving, so freezing periods (invisible to the
+     tracker) reduce their precision.</p>
+
+  <div class="callout green">
+    Multiple independent measures converging on similar reliability values
+    is a good sign: it means the individual differences we're detecting are
+    real and consistent across different ways of describing the same behavior,
+    not just a quirk of one particular measurement choice.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SECTION 7 — TAKEAWAYS
+     ══════════════════════════════════════════════════════════════════════ -->
+<section>
+<div class="inner">
+  <p class="section-label">Summary</p>
+  <h2>What we found</h2>
+  <ul class="takeaway-list">
+    <li>
+      <div class="take-icon">1</div>
+      <div>
+        <strong>Zebrafish pct_top is a reliable individual measure.</strong>
+        A single 20-minute session captures enough stable between-fish
+        variation (R ≈ 0.50) to be useful. Averaging six sessions roughly
+        doubles reliability to α = 0.855 — well within the range considered
+        strong for a behavioral measure.
+      </div>
+    </li>
+    <li>
+      <div class="take-icon">2</div>
+      <div>
+        <strong>The first exposure is qualitatively different.</strong>
+        Run 1 measures how quickly a fish recovers from novelty-induced fear.
+        Runs 2–6 measure a more stable exploration tendency. Researchers
+        using only a single novel-tank session should be aware they are
+        measuring a different construct than those who use repeated sessions.
+      </div>
+    </li>
+    <li>
+      <div class="take-icon">3</div>
+      <div>
+        <strong>Multiple measures agree.</strong>
+        Velocity and horizontal range are just as repeatable as vertical
+        position. Reliability is a property of the fish, not just one
+        particular way of measuring it.
+      </div>
+    </li>
+    <li>
+      <div class="take-icon">4</div>
+      <div>
+        <strong>The Python pipeline reproduces the original analysis.</strong>
+        Starting from the same distortion-corrected tracking data, this
+        reanalysis recovers α = 0.855 (raw) to 0.874 (position-corrected),
+        converging with the original Mathematica result of 0.88.
+      </div>
+    </li>
+    <li>
+      <div class="take-icon">!</div>
+      <div>
+        <strong>One caveat: strain cannot be analyzed.</strong>
+        The study used two genetic strains, but every testing batch was
+        entirely one strain. Any "strain difference" is therefore
+        indistinguishable from a "batch difference" (date, room, handler).
+        All reliability findings hold equally within each strain, which
+        confirms the pooled results are not a statistical artefact.
+      </div>
+    </li>
+  </ul>
+</div>
+</section>
+
+<!-- ── Footer ───────────────────────────────────────────────────────────────── -->
+<footer>
+  <p>Data and code:
+     <a href="https://github.com/bsheese/zf_p01_bruno_r26" target="_blank">
+       github.com/bsheese/zf_p01_bruno_r26
+     </a>
+     &nbsp;·&nbsp;
+     Raw tracking data:
+     <a href="https://zenodo.org/records/20707067" target="_blank">
+       Zenodo 20707067
+     </a>
+  </p>
+  <p style="margin-top:.5rem">
+    P1 zebrafish novel-tank behavioral reliability study &nbsp;·&nbsp;
+    Illinois Wesleyan University
+  </p>
+</footer>
+
+</body>
+</html>
