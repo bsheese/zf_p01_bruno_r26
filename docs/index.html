@@ -203,21 +203,6 @@ tr:nth-child(even) td { background: rgba(0,0,0,.025); }
 .bar-bg { flex: 1; background: var(--border); border-radius: 99px; height: 7px; }
 .bar-fill { background: var(--teal); border-radius: 99px; height: 7px; }
 
-/* ── Literature row ────────────────────────────────────────────────────── */
-.lit-row {
-  display: flex; flex-wrap: wrap; gap: 1rem; margin: 1.5rem 0;
-}
-.lit-card {
-  flex: 1 1 180px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1rem;
-  background: var(--bg);
-}
-section:nth-child(even) .lit-card { background: rgba(247,244,239,.6); }
-.lit-number { font-size: 1.5rem; font-weight: 700; color: var(--muted); }
-.lit-label  { font-size: 0.8rem; color: var(--muted); margin-top: .2rem; }
-
 /* ── Takeaways ─────────────────────────────────────────────────────────── */
 .takeaway-list { list-style: none; margin: 1.5rem 0; }
 .takeaway-list li {
@@ -450,27 +435,6 @@ footer a:hover { text-decoration: underline; }
     not batch-to-batch quirks.
   </div>
 
-  <p>Compared to published work on related measures:</p>
-  <div class="lit-row">
-    <div class="lit-card">
-      <div class="lit-number">≈ 0.37</div>
-      <div class="lit-label">Bell 2009<br>meta-analysis mean R (lab studies)</div>
-    </div>
-    <div class="lit-card">
-      <div class="lit-number">0.39</div>
-      <div class="lit-label">Thomson 2020<br>zebrafish bottom-time R</div>
-    </div>
-    <div class="lit-card">
-      <div class="lit-number">0.29</div>
-      <div class="lit-label">Johnson 2025<br>zebrafish lower-zone r</div>
-    </div>
-    <div class="lit-card">
-      <div class="lit-number">~0.50</div>
-      <div class="lit-label"><strong>This study</strong><br>pct_top R per session</div>
-    </div>
-  </div>
-  <p>Our single-session repeatability sits at or above the upper end of
-     published values — a strong result for a behavioral measure.</p>
 </div>
 </section>
 
