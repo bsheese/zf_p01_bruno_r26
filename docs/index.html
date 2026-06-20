@@ -54,6 +54,18 @@ nav a {
 nav a:hover { color: var(--gold); }
 .nav-links { display: flex; gap: 1.5rem; }
 
+/* ── AI disclaimer banner ───────────────────────────────────────────────── */
+.ai-banner {
+  background: #fffbeb;
+  border-bottom: 2px solid var(--gold);
+  padding: .7rem 2rem;
+  font-size: 0.85rem;
+  color: #555;
+  text-align: center;
+  line-height: 1.5;
+}
+.ai-banner a { color: var(--teal); font-weight: 600; }
+
 /* ── Hero ──────────────────────────────────────────────────────────────── */
 .hero {
   background: var(--navy);
@@ -245,6 +257,16 @@ footer a:hover { text-decoration: underline; }
     <a href="#measures">Measures</a>
   </div>
 </nav>
+
+<!-- ── AI disclaimer ────────────────────────────────────────────────────────── -->
+<div class="ai-banner">
+  <strong>AI-generated analysis and website.</strong>
+  The Python reanalysis, figures, and this page were produced largely by AI
+  (Claude Opus 4.8, Claude Sonnet 4.6, Gemini Pro 3.1) with human orchestration.
+  The original 2013 tracking data are human-produced.
+  All normal AI caveats apply — please verify anything interesting from scratch.
+  See the <a href="https://github.com/bsheese/zf_p01_bruno_r26#readme" target="_blank" rel="noopener">README</a> for full context.
+</div>
 
 <!-- ── Hero ────────────────────────────────────────────────────────────────── -->
 <div class="hero">
