@@ -2,7 +2,7 @@
 
 This repository presents the following: 
 * Real data from an unpublished 2013 study of Zebrafish behavior in the novel-tank paradigm. 103 fish were assayed on six separate occassions for 20 minutes each. So, quite a bit of fish data: 103 fish X 6 sessions X 20 minutes at a sampling rate of 6 frames per second = ~ 4.5 million x, y, pairs. Do with it as you please. 
-* A 2026 re-analysis of the 2013 study driven by A.I. which converged with the original human analysis. All the normal A.I. cautions apply here. I'd encourage you to re-derive anything interesting from scratch to verify it. That said, the A.I. has done a lot of work here to translate the raw data into data sets you can work with. You can get a good sense of the data by following the code that does this initial processing. If you find errors, please post use Github Issues or send me a note.
+* A 2026 re-analysis of the 2013 study driven by A.I. which converged with the original human analysis. All the normal A.I. cautions apply here. I'd encourage you to re-derive anything interesting from scratch to verify it. That said, the A.I. has done a lot of work here to translate the raw data into data sets you can work with. You can get a good sense of the data by following the code that does this initial processing. Claude 4.8 put together a breif explainer [website here](https://bsheese.github.io/zf_p01_bruno_r26/). If you find errors, please use Github Issues or send me a note.
 
 
 ## The Original Study: Developing an Inexpensive High-Throughput Tracking System for Zebrafish 
