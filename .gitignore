@@ -1,4 +1,5 @@
-lit/
+lit/*
+!lit/README.md
 CLAUDE.md
 
 # Local-only working notes / vault
