@@ -11,8 +11,8 @@ PHYSICAL STAND LAYOUT (recovered from tank polygons)
         7       467.1       326.9      R          3 bottom_half
         8       455.6       430.0      R          4 bottom_half
 
-  frame_row 1 = top of camera frame (the slots the Python re-track
-  found overexposed). frame_row 4 = bottom of frame.
+  frame_row 1 = top of camera frame (the slots most prone to
+  overexposure). frame_row 4 = bottom of frame.
 
 ======================================================================
 1. DETECTION RATE BY PHYSICAL SLOT  (all 624 sessions)

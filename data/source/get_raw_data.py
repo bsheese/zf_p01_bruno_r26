@@ -8,7 +8,7 @@ the SHA-256 checksum, then the pipeline can run:
 
     python data/source/get_raw_data.py
     python src/01_ingest.py        # -> data/merged/tracking_merged.csv
-    python src/03_features.py      # -> data/features/
+    python src/02_features.py      # -> data/features/
 
 The file is the Attempt-05 distortion-corrected Mathematica triallevel output
 (columns: run, dayafternoon, tank, fishid, framenumber, x, y, deltax, deltay).

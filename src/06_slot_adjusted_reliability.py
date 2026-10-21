@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-07_slot_adjusted_reliability.py — does removing the physical-slot artifact
+06_slot_adjusted_reliability.py — does removing the physical-slot artifact
 improve test-retest reliability of pct_top?
 
-Section 5 of tracking_quality_by_position.md found a small residual gradient:
+Section 5 of docs/tracking_quality_by_position.md found a small residual gradient:
 pct_top declines from frame-top to frame-bottom slots (~8.6 pts, ANOVA p=0.025),
 plus a mild L/R asymmetry. Because fish are randomized to slots, this is a
 tracking/distortion residual, not behaviour. If we regress it out, the noise it
 injects into the fish x run matrix should shrink and Cronbach's alpha should
-rise toward the original (unpublished) analysis's 0.88.
+rise toward the original SPSS analysis's 0.88.
 
-Uses the per-session pct_top from src/06 (raw detected frames, no interpolation),
+Uses the per-session pct_top from src/05 (raw detected frames, no interpolation),
 so the RAW alpha here is the internal baseline for the comparison — not
 necessarily identical to the pipeline's interpolated 0.855.
 """
@@ -92,7 +92,7 @@ def main():
         P(f"  {label:24s}: α = {a:.3f}  95% CI [{ci[0]:.3f}, {ci[1]:.3f}]"
           f"   mean inter-run r = {mr:.3f}   (N={n})")
     P("")
-    P("  Reference: original (unpublished) analysis α = 0.88; pipeline (interpolated) α = 0.855")
+    P("  Reference: original SPSS analysis α = 0.88; pipeline (interpolated) α = 0.855")
     P("")
 
     # ---- 4. variance accounted for by slot ----

@@ -2,8 +2,8 @@
 """
 make_gifs.py  —  generate animated GIFs and copy figures for the GitHub Pages site.
 
-Run from the repo root AFTER the analysis pipeline has been run:
-    python3 make_gifs.py
+Run AFTER the analysis pipeline has been run (works from any directory):
+    python3 docs/make_gifs.py
 
 Outputs → docs/images/
 """
@@ -18,7 +18,7 @@ import matplotlib.animation as animation
 from matplotlib.animation import PillowWriter
 from pathlib import Path
 
-ROOT  = Path(".")
+ROOT  = Path(__file__).resolve().parents[1]
 FEAT  = ROOT / "data" / "features"
 FIGS  = ROOT / "output" / "figures"
 DOCS  = ROOT / "docs" / "images"

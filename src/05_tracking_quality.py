@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-06_tracking_quality.py — Mathematica tracking quality as a function of
+05_tracking_quality.py — Mathematica tracking quality as a function of
 physical position on the 8-tank stand.
 
 Question: does the Mathematica tracking quality depend on physical position on
@@ -20,7 +20,7 @@ the positional breakdown (the merged file has already dropped them).
 Outputs:
   output/tracking_quality_by_position.csv   per-session metrics + layout
   output/tracking_quality_summary.txt       printed tables
-  figures/06a_quality_by_position.png        detection rate / extremes by slot
+  output/figures/tracking_quality_by_position.png  detection rate / extremes by slot
 """
 
 import numpy as np
@@ -35,7 +35,7 @@ SOURCE    = ROOT / "data" / "source" / "tracking_triallevel_distortion_corrected
 SETTINGS  = ROOT / "data" / "source" / "P1-BatchSettingsCombined-v5.csv"
 INCLUDE_CSV = ROOT / "data" / "source" / "tracking_aggregate_uncorrected.csv"
 OUT_DIR   = ROOT / "output"
-FIG_DIR   = ROOT / "figures"
+FIG_DIR   = ROOT / "output" / "figures"
 
 CUTOFF_FRAME = 1805
 MAX_FRAME    = 37805
@@ -267,8 +267,8 @@ def main():
 
     fig.suptitle("Mathematica tracking quality by physical stand position", fontsize=13)
     fig.tight_layout()
-    fig.savefig(FIG_DIR / "06a_quality_by_position.png", dpi=130)
-    P(f"Saved figure → {FIG_DIR / '06a_quality_by_position.png'}")
+    fig.savefig(FIG_DIR / "tracking_quality_by_position.png", dpi=130)
+    P(f"Saved figure → {FIG_DIR / 'tracking_quality_by_position.png'}")
 
 
 if __name__ == "__main__":

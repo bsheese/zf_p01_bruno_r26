@@ -4,16 +4,16 @@
 
 Reads the distortion-corrected frame-by-frame tracking output from the
 original Mathematica pipeline and writes tracking_merged.csv, ready for
-03_features.py.  This is step 1 of the analysis pipeline; the reanalysis
+02_features.py.  This is step 1 of the analysis pipeline; the reanalysis
 starts from the Mathematica distortion-corrected tracking output.
 
 Input
 -----
-  p01bruno_r26/data/source/tracking_triallevel_distortion_corrected.csv
+  data/source/tracking_triallevel_distortion_corrected.csv
 
 Output
 ------
-  p01bruno_r26/data/merged/tracking_merged.csv
+  data/merged/tracking_merged.csv
 
 Source-file column encoding
 ---------------------------
@@ -35,7 +35,7 @@ Top/bottom convention
   top    = y >= 61  (closer to water surface)
 
   This is INVERTED relative to raw-video pixel convention, where
-  at_bottom = y > y_mid.  03_features.py is updated accordingly.
+  at_bottom = y > y_mid.  02_features.py follows the corrected convention.
 """
 
 import pandas as pd
@@ -45,7 +45,7 @@ from pathlib import Path
 ROOT      = Path(__file__).resolve().parents[1]
 SOURCE    = ROOT / "data" / "source" / "tracking_triallevel_distortion_corrected.csv"
 INCLUDE_CSV = ROOT / "data" / "source" / "tracking_aggregate_uncorrected.csv"
-DECODE_XL = ROOT / "data" / "source" / "P1-Tank Randomization Decoding v2.xlsx"
+DECODE_CSV = ROOT / "data" / "source" / "tank_randomization_decode.csv"
 OUT_DIR   = ROOT / "data" / "merged"
 
 FPS          = 29.97
@@ -65,7 +65,7 @@ def load_exclude_set() -> set:
     35 sessions are excluded: 7 missing-video NaNs, 6 empty-tank (fish 138),
     4 sick-fish (fish 116), and 18 sessions with catastrophically low detection
     counts (all below p10 of included sessions; most under 5% of the median).
-    Rationale and full session list: p01bruno_r26/manuscript/methods.md
+    The flags are carried in tracking_aggregate_uncorrected.csv (include=0).
     """
     df = pd.read_csv(INCLUDE_CSV)
     df = df[df["include"] == 0].copy()
@@ -76,10 +76,9 @@ def load_exclude_set() -> set:
 
 
 def load_strain_map() -> dict:
-    """Return {batch: strain_label} from the tank randomization workbook."""
-    df = pd.read_excel(DECODE_XL, sheet_name="Sheet1")
-    df.columns = [c.strip() for c in df.columns]
-    df = df.rename(columns={"Batch": "batch", "File name": "file_stem"})
+    """Return {batch: strain_label} from the tank randomization decode table."""
+    df = pd.read_csv(DECODE_CSV)
+    df = df.rename(columns={"file_name": "file_stem"})
     df["batch"] = df["batch"].astype(int)
 
     def _strain(stem: str) -> str:
@@ -115,7 +114,6 @@ def main():
     df["fish_id"]   = df["fishid"].astype(int)
 
     # Apply original quality-control exclusions from v5 CSV (include=0).
-    # See p01bruno_r26/manuscript/methods.md for the full breakdown and justification.
     exclude_set = load_exclude_set()
     before = len(df)
     key = list(zip(df["fish_id"], df["batch"], df["run"]))

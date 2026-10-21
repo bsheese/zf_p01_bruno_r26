@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-08_repeatability.py — Variance-partitioning repeatability (R) of pct_top
+07_repeatability.py — Variance-partitioning repeatability (R) of pct_top
 
 Motivation
 ----------
-04_stats.py reports Cronbach's α = 0.855 for pct_top across the 6 runs. α is a
+03_stats.py reports Cronbach's α = 0.855 for pct_top across the 6 runs. α is a
 6-session *composite* reliability and is NOT on the same scale as the
 single-measure repeatability R reported throughout the animal-personality
 literature (bell2009 mean R≈0.37; thomson2020 bottom-time R=0.39; johnson2025
@@ -27,7 +27,7 @@ Two analyses:
 
   2. Novelty (Run 1) vs trait (Runs 2–6) repeatability
      Run 1 is the novel-tank debut and correlates weakly with later runs
-     (analysis.md §2,7). The all-6-run R_A conflates the shared novelty→trait
+     (see output/stats_main.txt). The all-6-run R_A conflates the shared novelty→trait
      mean shift with individual trait consistency (Biro & Stamps 2015). Report R
      and α with and without Run 1, and decompose the time trend (R_A vs R_C).
 
@@ -250,7 +250,7 @@ def main():
     lines.append(
         "  R = V_among / (V_among + V_within), the field-standard single-measure\n"
         "  repeatability (Lessells & Boag 1987; Nakagawa & Schielzeth 2010).\n"
-        "  Cronbach's α (04_stats) is a 6-session COMPOSITE reliability and is not\n"
+        "  Cronbach's α (03_stats) is a 6-session COMPOSITE reliability and is not\n"
         "  directly comparable to single-measure R from the literature.\n"
         "    R_A = agreement   (runs not modelled)\n"
         "    R_C = consistency (run as fixed effect; removes population mean shift)")
@@ -349,8 +349,8 @@ def main():
     # 3. NOVELTY (RUN 1) vs TRAIT (RUNS 2–6)
     # ====================================================================
     lines.append(section("3. NOVELTY (RUN 1) vs TRAIT (RUNS 2–6) REPEATABILITY"))
-    lines.append("  Run 1 is the novel-tank debut; runs 2–6 are re-exposures (analysis.md")
-    lines.append("  §2,7). The all-6-run R conflates the shared novelty→trait mean shift")
+    lines.append("  Run 1 is the novel-tank debut; runs 2–6 are re-exposures. The")
+    lines.append("  all-6-run R conflates the shared novelty→trait mean shift")
     lines.append("  with individual trait consistency (Biro & Stamps 2015). Reported with")
     lines.append("  and without Run 1, decomposing agreement (R_A) vs consistency (R_C).")
 

@@ -1,7 +1,6 @@
 # Mathematica Tracking Quality by Stand Position
 
-**Date:** 2026-06-10
-**Script:** `src/06_tracking_quality.py` → `output/tracking_quality_by_position.csv`, `output/tracking_quality_summary.txt`, `figures/06a_quality_by_position.png`
+**Script:** `src/05_tracking_quality.py` → `output/tracking_quality_by_position.csv`, `output/tracking_quality_summary.txt`, `output/figures/tracking_quality_by_position.png`
 **Question:** Does the original Mathematica tracking quality depend on physical position on the 8-tank stand? In particular, do the frame-top slots — where the video is most prone to overexposure — show degraded tracking?
 
 ## TL;DR
@@ -39,7 +38,7 @@ A failing tracker can pin detections to a fixed lighting artifact — a static b
 
 ### 3. The "top-row tanks fail" claim was batch-1-specific
 
-`manuscript/methods.md` noted that in batch-1/run-1 the top-row tanks (1,2,5,6) were all excluded — read at the time as a stand-position weakness. Across the full dataset it isn't one: the 35 QC exclusions split **evenly** between frame halves (18 top-half vs 17 bottom-half; exclusion rate 5.8% vs 5.4%). The batch-1 event was a one-session lighting problem, not a systematic property of those slots.
+In batch 1, run 1, the top-row tanks (1, 2, 5, 6) were all excluded by the original QC — which could be read as a stand-position weakness. Across the full dataset it isn't one: the 35 QC exclusions split **evenly** between frame halves (18 top-half vs 17 bottom-half; exclusion rate 5.8% vs 5.4%). The batch-1 event was a one-session lighting problem, not a systematic property of those slots.
 
 ### 4. The overexposure-bias prediction is refuted (the decisive test)
 
@@ -65,7 +64,7 @@ There *is* a statistically detectable slot effect (one-way ANOVA `pct_top ~ slot
 
 ### 6. Removing the slot artifact recovers ~half the reliability gap
 
-Robustness check (`src/07_slot_adjusted_reliability.py` → `output/slot_adjusted_reliability.txt`). Using session-level `pct_top` from raw detected frames (no interpolation), the slot artifact was regressed out two ways — by frame row (4 levels) and by full physical slot (8 levels) — and Cronbach's alpha recomputed on the fish × 6-run matrix (complete cases, N=82):
+Robustness check (`src/06_slot_adjusted_reliability.py` → `output/slot_adjusted_reliability.txt`). Using session-level `pct_top` from raw detected frames (no interpolation), the slot artifact was regressed out two ways — by frame row (4 levels) and by full physical slot (8 levels) — and Cronbach's alpha recomputed on the fish × 6-run matrix (complete cases, N=82):
 
 | `pct_top` version | Cronbach's α | mean inter-run r |
 |-------------------|--------------|------------------|
@@ -75,7 +74,7 @@ Robustness check (`src/07_slot_adjusted_reliability.py` → `output/slot_adjuste
 
 Removing the position residual lifts α from 0.852 to **0.866** and mean inter-run r from 0.497 to 0.525 — closing roughly **half** the gap to the original analysis's 0.88. Physical position explains only ~2.4–2.7% of session-level `pct_top` variance (slot F p=0.025; frame-row F p=0.003), but because that variance is pure noise with respect to the fish's trait, removing it still measurably tightens reliability. The remaining gap to 0.88 is most plausibly the interpolation difference (the original analysis's SPSS carry-forward vs. our linear interpolation).
 
-**Now folded into the main pipeline.** `03_features.py` carries `tank_pos` through to the per-minute features; `04_stats.py` derives `frame_row`, builds slot-adjusted `pct_top` columns (`add_slot_adjustment`, frame-row groups), writes `output/run_table_slot_adjusted.csv`, and reports adjusted alpha beside the raw value in Section 1 of `stats_main.txt`. On the pipeline's **interpolated** `pct_top`, slot adjustment lifts full-window α from **0.855 → 0.874** (95% CI [0.826, 0.912], which includes 0.88) and first-10-min α to 0.879 — i.e. interpolation + slot adjustment together converge with the original analysis's 0.88. Raw `pct_top` remains the primary measure for all downstream analyses (strain, habituation, summary are unchanged); the adjusted value is reported as a reliability robustness result.
+**In the main pipeline.** `02_features.py` carries `tank_pos` through to the per-minute features; `03_stats.py` derives `frame_row`, builds slot-adjusted `pct_top` columns (`add_slot_adjustment`, frame-row groups), writes `output/run_table_slot_adjusted.csv`, and reports adjusted alpha beside the raw value in Section 1 of `stats_main.txt`. On the pipeline's **interpolated** `pct_top`, slot adjustment lifts full-window α from **0.855 → 0.874** (95% CI [0.826, 0.912], which includes 0.88) and first-10-min α to 0.879 — i.e. interpolation + slot adjustment together converge with the original analysis's 0.88. Raw `pct_top` remains the primary measure for all downstream analyses; the adjusted value is reported as a reliability robustness result.
 
 Two confirmations that the artifact is benign at the trait level:
 - Per-fish mean `pct_top` is **uncorrelated** with the slots a fish occupied: vs. mean frame row r=+0.084 (p=0.40); vs. fraction-right-column r=+0.033 (p=0.74). Randomization neutralizes the gradient for per-fish estimates.
@@ -84,7 +83,7 @@ Two confirmations that the artifact is benign at the trait level:
 ## Implications
 
 1. **The decision to base the reanalysis on the Mathematica tracking output is well-justified.** The tracking is sound and roughly uniform across all stand positions; it does not carry the overexposure/static-artifact pathologies the frame-top slots might have been expected to show.
-2. **The residual frame-row gradient is real but removable, and reclaims ~half the reliability gap** (Section 6). Slot-adjusting `pct_top` lifts α from 0.852 to 0.866; per-fish trait estimates are unbiased by slot. This strengthens the replication and points to interpolation as the likely source of the remaining gap to 0.88.
+2. **The residual frame-row gradient is real but removable, and reclaims ~half the reliability gap** (Section 6). Slot-adjusting `pct_top` lifts α from 0.852 to 0.866; per-fish trait estimates are unbiased by slot. This brings the re-implementation closer to the original estimate and points to interpolation as the likely source of the remaining gap to 0.88.
 3. **The frame-differencing "freezing is invisible" limitation is unaffected by this** — it is a property of the algorithm, not of position, and applies equally everywhere.
 
 ## Caveats

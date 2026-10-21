@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-04_stats.py — Reliability and behavioral pattern analyses
+03_stats.py — Reliability and behavioral pattern analyses
 
-Inputs:  p01bruno_r26/data/features/features_by_minute.csv
-         p01bruno_r26/data/features/features_summary.csv
-         p01bruno_r26/data/features/features_sessions.csv
+Inputs:  data/features/features_by_minute.csv
+         data/features/features_summary.csv
+         data/features/features_sessions.csv
 
-Outputs: p01bruno_r26/output/stats_main.txt       — all text results
-         p01bruno_r26/output/stats_correlations.csv — inter-run r matrix
-         p01bruno_r26/output/stats_icc.csv          — ICC table by comparison type
-         p01bruno_r26/output/stats_habituation.csv  — minute-level mixed model coefs
+Outputs: output/stats_main.txt       — all text results
+         output/stats_correlations.csv — inter-run r matrix
+         output/stats_icc.csv          — ICC table by comparison type
+         output/stats_habituation.csv  — minute-level mixed model coefs
 
 Session structure
 -----------------
@@ -65,7 +65,7 @@ def cronbach_alpha(df_wide: pd.DataFrame) -> float:
 # Physical stand layout: tank_pos (1-8) is a fixed slot. Frame row 1 = top of
 # camera frame, 4 = bottom; columns L (slots 1-4) and R (slots 5-8). Recovered
 # from the tank polygons in P1-BatchSettingsCombined-v5.csv; see
-# tracking_quality_by_position.md (the gradient is captured fully by frame row).
+# docs/tracking_quality_by_position.md (the gradient is captured fully by frame row).
 def frame_row_of(tank_pos) -> int:
     return ((int(tank_pos) - 1) % 4) + 1
 
@@ -78,7 +78,7 @@ def add_slot_adjustment(df: pd.DataFrame, group_col: str = "frame_row") -> pd.Da
     Add slot-adjusted pct_top columns ("<col>_adj").
 
     Fish are randomized across physical slots, so any slot effect on pct_top is a
-    tracking/distortion residual rather than behaviour (tracking_quality_by_position.md
+    tracking/distortion residual rather than behaviour (docs/tracking_quality_by_position.md
     §4-6). The adjustment removes each slot group's mean deviation from the grand
     mean, leaving per-fish trait estimates unbiased while stripping the residual
     noise — which lifts test-retest reliability (~half the 0.855→0.88 gap).
@@ -156,7 +156,7 @@ def analysis_cronbach(df: pd.DataFrame, fish_full: pd.Index, lines: list):
         lines.append(f"    {label} (N={n}): α = {a:.3f}, 95% CI [{ci[0]:.3f}, {ci[1]:.3f}]")
 
     lines.append("\n  Slot-adjusted pct_top (physical-position residual removed; see")
-    lines.append("  tracking_quality_by_position.md). Fish are randomized across slots,")
+    lines.append("  docs/tracking_quality_by_position.md). Fish are randomized across slots,")
     lines.append("  so this removes tracking noise without biasing per-fish trait estimates:")
     for label, col in [
         ("full 20 min",   "pct_top_full_adj"),
@@ -166,7 +166,7 @@ def analysis_cronbach(df: pd.DataFrame, fish_full: pd.Index, lines: list):
         a, ci, n = _alpha(col)
         lines.append(f"    {label} (N={n}): α = {a:.3f}, 95% CI [{ci[0]:.3f}, {ci[1]:.3f}]")
 
-    lines.append("\n  Reference: original (unpublished) analysis α = .88 (full 20 min)")
+    lines.append("\n  Reference: original SPSS analysis α = .88 (full 20 min)")
 
 
 def analysis_interrun_corr(df: pd.DataFrame, fish_full: pd.Index, lines: list) -> pd.DataFrame:

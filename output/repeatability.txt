@@ -4,7 +4,7 @@
 ================================================================
   R = V_among / (V_among + V_within), the field-standard single-measure
   repeatability (Lessells & Boag 1987; Nakagawa & Schielzeth 2010).
-  Cronbach's α (04_stats) is a 6-session COMPOSITE reliability and is not
+  Cronbach's α (03_stats) is a 6-session COMPOSITE reliability and is not
   directly comparable to single-measure R from the literature.
     R_A = agreement   (runs not modelled)
     R_C = consistency (run as fixed effect; removes population mean shift)
@@ -59,8 +59,8 @@
 ================================================================
 3. NOVELTY (RUN 1) vs TRAIT (RUNS 2–6) REPEATABILITY
 ================================================================
-  Run 1 is the novel-tank debut; runs 2–6 are re-exposures (analysis.md
-  §2,7). The all-6-run R conflates the shared novelty→trait mean shift
+  Run 1 is the novel-tank debut; runs 2–6 are re-exposures. The
+  all-6-run R conflates the shared novelty→trait mean shift
   with individual trait consistency (Biro & Stamps 2015). Reported with
   and without Run 1, decomposing agreement (R_A) vs consistency (R_C).
 

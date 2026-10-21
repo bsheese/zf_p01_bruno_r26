@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-11_qc_checks.py — QC / robustness checks for the manuscript
+09_qc_checks.py — QC / robustness checks
 
-Reports, in one place, the design and robustness facts cited in the manuscript:
+Reports, in one place, the design and robustness facts behind the main results:
   0. Strain-batch confound: every batch is strain-pure → strain is confounded
-     with batch and is not analyzed (explains the scope of the paper).
+     with batch and is not analyzed (explains why no strain comparison is made).
   1. Complete-case attrition by strain (approximately balanced).
   2. Per-strain repeatability of pct_top (5G vs AB bracket the pooled R, so the
      pooled estimate is not a "chimera").
@@ -96,7 +96,7 @@ def main():
     lines.append(f"   Sessions where the fish never entered the top half: {n_never} "
                  f"of {len(ss)} ({100*n_never/len(ss):.1f}%)")
     lines.append(f"   These are coded as latency = {LATENCY_MAX:.0f} min (the full "
-                 "analysis window) in all downstream analyses (05_ml.py, 09_trait_structure.py).")
+                 "analysis window) for the latency reliability estimate (08_measure_reliability.py).")
 
     text = "\n".join(lines)
     print(text)

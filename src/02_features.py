@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-03_features.py — Interpolate trajectories and compute behavioral features
+02_features.py — Interpolate trajectories and compute behavioral features
 
-Takes p01bruno_r26/data/merged/tracking_merged.csv and produces:
+Takes data/merged/tracking_merged.csv and produces:
 
   tracking_interp.csv   — frame-level data with interpolated positions
   features_by_minute.csv — per-fish × per-minute aggregate features
@@ -13,7 +13,7 @@ Features computed
   at frame level (tracking_interp.csv):
     x_interp, y_interp   — linearly interpolated positions (NaN when impossible)
     detected             — 1 if original tracking fired, 0 if interpolated
-    at_bottom            — 1 if y_interp > y_mid (bottom half of tank)
+    at_bottom            — 1 if y_interp < y_mid (bottom half of tank; y=0 at floor)
     velocity             — Euclidean distance (px/sample) between consecutive frames
                            (NaN if either position is missing)
 

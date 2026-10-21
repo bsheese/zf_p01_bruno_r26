@@ -1,19 +1,15 @@
 This repository is dual-licensed.
 
-* SOFTWARE — all source code (the `src/` and `supplemental/` scripts, the
-  `manuscript/Makefile`, and any other code) is licensed under the MIT License,
-  reproduced in full below.
+* SOFTWARE — all source code (the `src/` scripts, the notebook, `docs/make_gifs.py`,
+  and any other code) is licensed under the MIT License, reproduced in full below.
 
 * DATA, TEXT, AND FIGURES — the dataset and derived data under `data/` and
-  `output/`, the manuscript and notes under `manuscript/`, the `README.md`, and
+  `output/`, the documentation (`README.md`, `data/README.md`, `docs/`), and
   all figures are licensed under the Creative Commons Attribution 4.0
   International License (CC-BY-4.0). You may share and adapt these materials with
   attribution. The full legal text is at:
   https://creativecommons.org/licenses/by/4.0/legalcode
   Human-readable summary: https://creativecommons.org/licenses/by/4.0/
-
-Third-party reference PDFs (if present under `lit/`) are NOT covered by either
-license and remain under their publishers' copyright.
 
 ================================================================================
 MIT License (applies to source code only)

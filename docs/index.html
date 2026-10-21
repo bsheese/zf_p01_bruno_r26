@@ -382,16 +382,16 @@ footer a:hover { text-decoration: underline; }
     </div>
     <div class="stat-card">
       <div class="stat-number">0.88</div>
-      <div class="stat-label">Original Mathematica<br>analysis result</div>
+      <div class="stat-label">Original SPSS<br>analysis result</div>
     </div>
   </div>
 
   <div class="callout green">
-    <strong>Replication check:</strong> Our Python pipeline reproduces the
+    <strong>Reproducibility check:</strong> Our Python pipeline reproduces the
     original result (α = 0.88) almost exactly. The small gap shrinks to
     essentially zero after correcting for a minor position artifact in the
-    camera frame — confirming the original finding was not a fluke of the
-    software used.
+    camera frame — so the original estimate holds up when the same
+    coordinates are re-analyzed in different software.
   </div>
 
   <p>The correlation matrix below shows all 15 pairwise relationships between
@@ -645,7 +645,7 @@ footer a:hover { text-decoration: underline; }
         <strong>The Python pipeline reproduces the original analysis.</strong>
         Starting from the same distortion-corrected tracking data, this
         reanalysis recovers α = 0.855 (raw) to 0.874 (position-corrected),
-        converging with the original Mathematica result of 0.88.
+        converging with the original SPSS result of 0.88.
       </div>
     </li>
     <li>

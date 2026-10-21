@@ -10,13 +10,13 @@ Fish with all 6 runs: 82 / 103
     last 10 min (N=82): α = 0.799, 95% CI [0.723, 0.859]
 
   Slot-adjusted pct_top (physical-position residual removed; see
-  tracking_quality_by_position.md). Fish are randomized across slots,
+  docs/tracking_quality_by_position.md). Fish are randomized across slots,
   so this removes tracking noise without biasing per-fish trait estimates:
     full 20 min (N=82): α = 0.874, 95% CI [0.826, 0.912]
     first 10 min (N=80): α = 0.879, 95% CI [0.833, 0.916]
     last 10 min (N=82): α = 0.821, 95% CI [0.753, 0.875]
 
-  Reference: original (unpublished) analysis α = .88 (full 20 min)
+  Reference: original SPSS analysis α = .88 (full 20 min)
 
 ============================================================
 2. INTER-RUN PEARSON CORRELATIONS — pct_top

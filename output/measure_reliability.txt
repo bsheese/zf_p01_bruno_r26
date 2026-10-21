@@ -1,4 +1,4 @@
-MEASURE RELIABILITY (manuscript Table 2)
+MEASURE RELIABILITY
 ==================================================
 589 sessions; 103 fish; 82 complete-case (all 6 runs)
 

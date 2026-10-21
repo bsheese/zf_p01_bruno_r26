@@ -30,4 +30,4 @@ QC / ROBUSTNESS CHECKS
 
 3. NON-ASCENDER LATENCY CODING (latency reliability only)
    Sessions where the fish never entered the top half: 2 of 589 (0.3%)
-   These are coded as latency = 20 min (the full analysis window) in all downstream analyses (05_ml.py, 09_trait_structure.py).
+   These are coded as latency = 20 min (the full analysis window) for the latency reliability estimate (08_measure_reliability.py).

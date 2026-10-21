@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-12_run1_curve.py — within-session pct_top trajectory, Run 1 vs Runs 2-6
+10_run1_curve.py — within-session pct_top trajectory, Run 1 vs Runs 2-6
 
 Makes the within-session novelty response visible: pooled across fish, pct_top
 by minute for the first (novel) exposure vs the familiar-tank re-exposures.

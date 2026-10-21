@@ -1,19 +1,18 @@
 #!/usr/bin/env python3
 """
-09_measure_reliability.py — short-term reliability of the five novel-tank measures
+08_measure_reliability.py — short-term reliability of the five novel-tank measures
 
-Manuscript Table 2: single-session repeatability R (one-way ANOVA, all sessions)
+Single-session repeatability R (one-way ANOVA, all sessions)
 and six-session composite reliability α (Cronbach, complete cases) for pct_top,
 latency, transitions, x_sd, and velocity.
 
-Also writes the per-session trait table used by the (exploratory) supplemental
-analyses in `supplemental/`.
+Also writes the per-session five-measure table (trait_sessions.csv).
 
 Inputs:  data/features/features_by_minute.csv, features_sessions.csv,
          tracking_interp.csv
 Outputs: data/features/trait_sessions.csv   — per fish×run, 5 measures
          output/measure_reliability.txt
-         output/measure_reliability.csv      — Table 2
+         output/measure_reliability.csv
 """
 
 import numpy as np
@@ -24,7 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FEAT = ROOT / "data" / "features"
 OUT  = ROOT / "output"
 
-LATENCY_MAX = 20.0   # NaN latency → full analysis window (matches 05_ml/ supplemental)
+LATENCY_MAX = 20.0   # NaN latency → full analysis window
 MEASURES = ["pct_top", "latency", "transitions", "x_sd", "velocity"]
 
 
@@ -81,7 +80,7 @@ def main():
     rc = sess.groupby("fish_id")["run"].nunique()
     cc = sess[sess["fish_id"].isin(rc[rc == 6].index)]   # complete-case for α
 
-    lines = ["MEASURE RELIABILITY (manuscript Table 2)",
+    lines = ["MEASURE RELIABILITY",
              "=" * 50,
              f"{len(sess)} sessions; {sess.fish_id.nunique()} fish; "
              f"{cc.fish_id.nunique()} complete-case (all 6 runs)\n",
